@@ -19,7 +19,7 @@
   @keyframes om-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { [data-marquee] { animation: none !important; } }
   details > summary::-webkit-details-marker { display: none; }
-  @media (max-width: 1080px) { [data-hero-row] { flex-direction: column !important; } }
+  @media (max-width: 1080px) { [data-hero-row] { flex-direction: column !important; } [data-hero-row] > img { flex: none !important; width: 100% !important; height: auto !important; } }
   @media (max-width: 980px) {
     [data-ro-row] { flex-direction: column !important; align-items: stretch !important; }
     [data-ro-arrow] { transform: rotate(90deg); }
