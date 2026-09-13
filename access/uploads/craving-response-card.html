@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Craving Response Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F2E4; --card:#FFFFFF; --card-2:#EFE6CE;
+    --ink:#20301F; --ink-2:#5B6353; --ink-3:#8B9280;
+    --line:#E3D9BE; --line-2:#CFC29D;
+    --rust:#B5502E; --rust-soft:#F1DCCB; --rust-ink:#7C3016;
+    --owned:#2F6B45; --owned-soft:#DEEAE0;
+    --cover-1:#233423; --cover-2:#16211A; --cover-ink:#F3EEDD; --cover-ink-2:#C9C29B;
+    --shadow:0 1px 2px rgba(32,48,31,.05), 0 8px 24px -10px rgba(32,48,31,.18);
+    --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --f-body:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-data:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure:36rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+      --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+      --line:#333A24; --line-2:#454C30;
+      --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+      --owned:#63AD82; --owned-soft:#1E3125;
+      --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+    --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+    --line:#333A24; --line-2:#454C30;
+    --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+    --owned:#63AD82; --owned-soft:#1E3125;
+    --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;line-height:1.16;margin:0;color:inherit;}
+  p{margin:0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  button{font-family:inherit;}
+  input,textarea{font-family:inherit;}
+  a{color:var(--rust-ink);}
+  :focus-visible{outline:2px solid var(--owned);outline-offset:2px;border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .wrap{max-width:40rem;margin:0 auto;padding:0 0 4.5rem;}
+  .label{font-family:var(--f-data);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-3);}
+  .small{font-size:.87rem;line-height:1.55;color:var(--ink-2);}
+  .measure{max-width:var(--measure);}
+
+  /* ---------------- cover band ---------------- */
+  .cover{background:linear-gradient(160deg,var(--cover-1),var(--cover-2));color:var(--cover-ink);padding:2.6rem 1.35rem 2.3rem;display:flex;flex-direction:column;gap:1.15rem;}
+  .cover-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .mark{width:2.1rem;height:2.1rem;border:1px solid rgba(243,238,221,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:.95rem;flex:none;}
+  .cover-eyebrow{font-family:var(--f-data);font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--cover-ink-2);}
+  .cover h1{font-size:clamp(1.9rem,7vw,2.5rem);color:var(--cover-ink);max-width:22ch;}
+  .cover .sub{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.02rem;color:var(--cover-ink-2);max-width:32ch;line-height:1.45;}
+  .cover-rule{width:2.3rem;height:2px;background:var(--rust);}
+  .cover-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:.6rem;border-top:1px solid rgba(243,238,221,.16);font-size:.82rem;color:var(--cover-ink-2);}
+  .cover-foot b{color:var(--cover-ink);font-weight:600;}
+
+  /* ---------------- sections ---------------- */
+  section.block{padding:2.1rem 1.35rem;border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:none;}
+  .block-head{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.3rem;}
+  .block-head h2{font-size:1.35rem;}
+  .block-head p{font-size:.92rem;color:var(--ink-2);}
+
+  /* ---------------- sample banner ---------------- */
+  .sample-banner{margin:0 1.35rem 0;background:var(--rust-soft);border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:3px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.6rem;transform:translateY(-1.1rem);}
+  .sample-banner p{font-size:.87rem;line-height:1.5;color:var(--ink);}
+  .sample-banner .tag{font-family:var(--f-data);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rust-ink);}
+  .btn{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--f-data);font-size:.7rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.62rem 1rem;border-radius:3px;cursor:pointer;text-align:center;width:fit-content;}
+  .btn:hover{opacity:.88;}
+  .btn.owned{background:var(--owned);border-color:var(--owned);color:#fff;}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .link-btn{background:none;border:none;padding:0;font-family:var(--f-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+
+  /* ---------------- trigger cards (input) ---------------- */
+  .entry-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.05rem 1.1rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.9rem;margin-bottom:.85rem;position:relative;}
+  .entry-card .en{position:absolute;top:1rem;right:1.05rem;font-family:var(--f-data);font-size:.62rem;color:var(--ink-3);}
+  .field{display:flex;flex-direction:column;gap:.4rem;}
+  .field label{font-family:var(--f-data);font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);}
+  .field input[type=text],.field textarea{border:1px solid var(--line-2);background:var(--paper);color:var(--ink);border-radius:5px;padding:.6rem .7rem;font-size:.92rem;line-height:1.45;resize:vertical;}
+  .field input[type=text]:focus,.field textarea:focus{border-color:var(--owned);}
+  .field .hint{font-size:.78rem;color:var(--ink-3);line-height:1.5;font-style:italic;}
+  .entry-foot{display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;}
+  .tested-row{display:flex;align-items:center;gap:.55rem;cursor:pointer;}
+  .tested-row input{width:1.05rem;height:1.05rem;accent-color:var(--owned);cursor:pointer;}
+  .tested-row span{font-size:.85rem;color:var(--ink-2);}
+  .remove-btn{background:none;border:none;padding:0;font-family:var(--f-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--rust-ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+  .add-row{display:flex;justify-content:center;padding-top:.2rem;}
+
+  /* ---------------- pocket card (output) ---------------- */
+  .pocket-wrap{display:flex;justify-content:center;}
+  .pocket{width:100%;max-width:23rem;background:var(--card);border:1.5px dashed var(--line-2);border-radius:10px;padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:1rem;position:relative;}
+  .pocket-tab{position:absolute;top:-.55rem;left:1.2rem;background:var(--rust);color:#fff;font-family:var(--f-data);font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .55rem;border-radius:3px;}
+  .pocket-head{display:flex;flex-direction:column;gap:.15rem;padding-top:.3rem;}
+  .pocket-head h3{font-size:1.05rem;}
+  .pocket-head span{font-size:.74rem;color:var(--ink-3);font-family:var(--f-data);}
+  .pocket-empty{font-size:.85rem;color:var(--ink-3);font-style:italic;line-height:1.5;}
+  .pocket-item{display:flex;flex-direction:column;gap:.3rem;padding:.7rem 0;border-top:1px dashed var(--line);}
+  .pocket-item:first-of-type{border-top:none;}
+  .pocket-if{font-family:var(--f-data);font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rust-ink);}
+  .pocket-trigger{font-family:var(--f-display);font-weight:600;font-size:.98rem;}
+  .pocket-arrow{font-size:.8rem;color:var(--ink-3);}
+  .pocket-response{font-size:.92rem;line-height:1.45;}
+  .pocket-status{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--f-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem;}
+  .pocket-status.tested{color:var(--owned);}
+  .pocket-status.untested{color:var(--ink-3);}
+  .pocket-status i{width:.5rem;height:.5rem;border-radius:50%;background:currentColor;display:inline-block;}
+
+  /* ---------------- keep / slip echoes ---------------- */
+  .note-card{background:var(--card-2);border:1px solid var(--line-2);border-radius:8px;padding:1.05rem 1.15rem;font-size:.9rem;line-height:1.55;color:var(--ink-2);}
+
+  footer{padding:1.6rem 1.35rem 0;display:flex;flex-direction:column;gap:.8rem;}
+  .disclosure{font-size:.8rem;line-height:1.55;color:var(--ink-3);}
+  .print-row{display:flex;justify-content:center;padding-top:.3rem;}
+
+  @media print{
+    body{background:#fff;}
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{position:absolute;top:0;left:0;width:100%;display:flex!important;justify-content:center;padding:2rem 0;}
+    .no-print{display:none!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-eyebrow">A Guide For Women On GLP&#8209;1 Medication</span>
+      <span class="mark">O</span>
+    </div>
+    <h1>The Craving Response Card</h1>
+    <p class="sub">Built from the Situations Branch of The GLP-1 Ownership Protocol.</p>
+    <span class="cover-rule"></span>
+    <div class="cover-foot">
+      <span>Rehearse it now, <b>while the medication still gives you room</b></span>
+      <span>Weeks 1&ndash;3 of the Situations Branch</span>
+    </div>
+  </div>
+
+  <div id="sampleBanner"></div>
+
+  <section class="block" id="mapSection">
+    <div class="block-head">
+      <span class="label">Step 1 &middot; Map your triggers</span>
+      <h2>What reliably sends things sideways?</h2>
+      <p class="measure">Think back to before the medication. Stress? Late nights? A particular kind of social event? Travel? &ldquo;Stress eating&rdquo; is usually too vague to be useful &mdash; look for the actual scene. Add up to three.</p>
+    </div>
+    <div id="entriesMount"></div>
+    <div class="add-row"><button class="btn ghost" id="addBtn" type="button">+ Add a trigger</button></div>
+  </section>
+
+  <section class="block" id="responseSection">
+    <div class="block-head">
+      <span class="label">Step 2 &middot; Build a response</span>
+      <h2>Decide it now, not in the moment</h2>
+      <p class="measure">For each trigger above, fill in exactly what you'll do next time it appears. <em>Not:</em> &ldquo;I'll be more mindful.&rdquo; <em>Instead:</em> &ldquo;I'll take a five-minute walk before deciding,&rdquo; or &ldquo;I'll text a friend first.&rdquo; The more concrete, the easier to use when your brain is already busy with the trigger.</p>
+    </div>
+    <div class="note-card">Your trigger may show up naturally &mdash; if it does, use the plan. If it doesn't, create a low-stakes version on purpose and test it while the stakes are still low. Then come back and check &ldquo;held under pressure&rdquo; below.</div>
+  </section>
+
+  <section class="block" id="cardSection">
+    <div class="block-head">
+      <span class="label">Your pocket card</span>
+      <h2>Keep this where you'll actually see it</h2>
+      <p class="measure">Updates live as you fill in the steps above.</p>
+    </div>
+    <div class="pocket-wrap"><div class="pocket" id="pocketMount"></div></div>
+    <div class="print-row no-print" style="margin-top:1.1rem;"><button class="btn" id="printBtn" type="button">Print my card</button></div>
+  </section>
+
+  <footer>
+    <p class="disclosure">This guide is a self-assessment and lifestyle framework, not a medical diagnosis or treatment plan. It includes no medication dosing guidance of any kind. If exercise, eating, or appetite ever starts to feel compulsive or distressing rather than manageable, or if any symptom feels like more than a normal adjustment, please talk to your prescriber or another qualified professional directly.</p>
+    <div class="print-row"><button class="link-btn no-print" id="resetBtn" type="button">Clear my data and start over</button></div>
+  </footer>
+
+  <div id="printArea" style="display:none;"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORE_KEY = "ownershipProtocolTriggerResponse_v1";
+  var MAX_ENTRIES = 3;
+
+  function uid(){ return Math.random().toString(36).slice(2,9); }
+
+  function sampleState(){
+    return {
+      sample:true,
+      entries:[
+        { id:uid(), trigger:"Dinner at my in-laws' — second helpings pushed on me", response:"Order or plate my protein first, then decide on the rest once that's done.", tested:true },
+        { id:uid(), trigger:"The hour after the kids are in bed", response:"Text a friend before I open the pantry, not after.", tested:false }
+      ]
+    };
+  }
+
+  function blankState(){
+    return { sample:false, entries:[ { id:uid(), trigger:"", response:"", tested:false } ] };
+  }
+
+  var state;
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    state = raw ? JSON.parse(raw) : sampleState();
+  }catch(e){ state = sampleState(); }
+
+  function save(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  function renderBanner(){
+    var mount = document.getElementById("sampleBanner");
+    if(!state.sample){ mount.innerHTML = ""; return; }
+    mount.innerHTML =
+      '<div class="sample-banner">'+
+      '<span class="tag">Example</span>'+
+      '<p>Two example triggers, one already tested. Edit any field to clear this and start your own.</p>'+
+      '<div><button class="btn owned" id="startRealBtn" type="button">Start mine</button></div>'+
+      '</div>';
+    document.getElementById("startRealBtn").addEventListener("click", function(){
+      state = blankState();
+      save();
+      renderAll();
+    });
+  }
+
+  function clearSampleIfNeeded(){
+    if(state.sample){ state.sample = false; }
+  }
+
+  function renderEntries(){
+    var mount = document.getElementById("entriesMount");
+    mount.innerHTML = "";
+    state.entries.forEach(function(entry, idx){
+      var card = document.createElement("div");
+      card.className = "entry-card";
+
+      var en = document.createElement("span");
+      en.className = "en";
+      en.textContent = "TRIGGER " + (idx+1) + " / " + MAX_ENTRIES;
+      card.appendChild(en);
+
+      var triggerField = document.createElement("div");
+      triggerField.className = "field";
+      triggerField.innerHTML = '<label>What\'s the actual scene?</label>';
+      var triggerInput = document.createElement("input");
+      triggerInput.type = "text";
+      triggerInput.placeholder = "e.g. Sunday grocery run when I'm already tired";
+      triggerInput.value = entry.trigger;
+      triggerInput.addEventListener("input", function(){
+        clearSampleIfNeeded();
+        entry.trigger = triggerInput.value;
+        save();
+        renderBanner();
+        renderPocket();
+      });
+      triggerField.appendChild(triggerInput);
+      card.appendChild(triggerField);
+
+      var responseField = document.createElement("div");
+      responseField.className = "field";
+      responseField.innerHTML = '<label>When this happens, I will&hellip;</label>';
+      var responseInput = document.createElement("textarea");
+      responseInput.rows = 2;
+      responseInput.placeholder = "e.g. Text a friend before I open the pantry, not after.";
+      responseInput.value = entry.response;
+      responseInput.addEventListener("input", function(){
+        clearSampleIfNeeded();
+        entry.response = responseInput.value;
+        save();
+        renderBanner();
+        renderPocket();
+      });
+      responseField.appendChild(responseInput);
+      var hint = document.createElement("div");
+      hint.className = "hint";
+      hint.textContent = "Concrete beats mindful. Name the exact first move.";
+      responseField.appendChild(hint);
+      card.appendChild(responseField);
+
+      var foot = document.createElement("div");
+      foot.className = "entry-foot";
+      var testedLabel = document.createElement("label");
+      testedLabel.className = "tested-row";
+      var testedInput = document.createElement("input");
+      testedInput.type = "checkbox";
+      testedInput.checked = !!entry.tested;
+      testedInput.addEventListener("change", function(){
+        clearSampleIfNeeded();
+        entry.tested = testedInput.checked;
+        save();
+        renderBanner();
+        renderPocket();
+      });
+      testedLabel.appendChild(testedInput);
+      var testedSpan = document.createElement("span");
+      testedSpan.textContent = "Tested it live — held under pressure";
+      testedLabel.appendChild(testedSpan);
+      foot.appendChild(testedLabel);
+
+      if(state.entries.length > 1){
+        var removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "remove-btn";
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", function(){
+          clearSampleIfNeeded();
+          state.entries = state.entries.filter(function(e){ return e.id !== entry.id; });
+          save();
+          renderAll();
+        });
+        foot.appendChild(removeBtn);
+      }
+      card.appendChild(foot);
+
+      mount.appendChild(card);
+    });
+
+    var addBtn = document.getElementById("addBtn");
+    addBtn.disabled = state.entries.length >= MAX_ENTRIES;
+    addBtn.textContent = state.entries.length >= MAX_ENTRIES ? "Three is the limit — fix your biggest leak first" : "+ Add a trigger";
+  }
+
+  function pocketHTML(){
+    var filled = state.entries.filter(function(e){ return e.trigger.trim() || e.response.trim(); });
+    var html = '<span class="pocket-tab">Pocket card</span>';
+    html += '<div class="pocket-head"><h3>My Situations plan</h3><span>The GLP-1 Ownership Protocol</span></div>';
+    if(!filled.length){
+      html += '<p class="pocket-empty">Fill in a trigger and a response above — this card fills in as you go.</p>';
+      return html;
+    }
+    filled.forEach(function(entry){
+      html += '<div class="pocket-item">';
+      html += '<span class="pocket-if">If&hellip;</span>';
+      html += '<span class="pocket-trigger">'+(escapeHtml(entry.trigger) || '<em style="color:var(--ink-3);">trigger not named yet</em>')+'</span>';
+      html += '<span class="pocket-arrow">&darr; then</span>';
+      html += '<span class="pocket-response">'+(escapeHtml(entry.response) || '<em style="color:var(--ink-3);">response not written yet</em>')+'</span>';
+      if(entry.response.trim()){
+        html += entry.tested
+          ? '<span class="pocket-status tested"><i></i>Tested &mdash; held</span>'
+          : '<span class="pocket-status untested"><i></i>Not tested yet</span>';
+      }
+      html += '</div>';
+    });
+    return html;
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement("div");
+    div.textContent = str || "";
+    return div.innerHTML;
+  }
+
+  function renderPocket(){
+    document.getElementById("pocketMount").innerHTML = pocketHTML();
+    document.getElementById("printArea").innerHTML = '<div class="pocket" style="max-width:23rem;">'+pocketHTML()+'</div>';
+  }
+
+  document.getElementById("addBtn").addEventListener("click", function(){
+    if(state.entries.length >= MAX_ENTRIES) return;
+    clearSampleIfNeeded();
+    state.entries.push({ id:uid(), trigger:"", response:"", tested:false });
+    save();
+    renderAll();
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    state = blankState();
+    save();
+    renderAll();
+    document.getElementById("top").scrollIntoView({behavior:"smooth"});
+  });
+
+  function renderAll(){
+    renderBanner();
+    renderEntries();
+    renderPocket();
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLP-1 Myths, Debunked</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F2E4; --card:#FFFFFF; --card-2:#EFE6CE;
+    --ink:#20301F; --ink-2:#5B6353; --ink-3:#8B9280;
+    --line:#E3D9BE; --line-2:#CFC29D;
+    --rust:#B5502E; --rust-soft:#F1DCCB; --rust-ink:#7C3016;
+    --owned:#2F6B45; --owned-soft:#DEEAE0;
+    --cover-1:#233423; --cover-2:#16211A; --cover-ink:#F3EEDD; --cover-ink-2:#C9C29B;
+    --shadow:0 1px 2px rgba(32,48,31,.05), 0 8px 24px -10px rgba(32,48,31,.18);
+    --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --f-body:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-data:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure:36rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+      --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+      --line:#333A24; --line-2:#454C30;
+      --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+      --owned:#63AD82; --owned-soft:#1E3125;
+      --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+    --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+    --line:#333A24; --line-2:#454C30;
+    --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+    --owned:#63AD82; --owned-soft:#1E3125;
+    --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;line-height:1.16;margin:0;color:inherit;}
+  p{margin:0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  button{font-family:inherit;}
+  a{color:var(--rust-ink);}
+  :focus-visible{outline:2px solid var(--owned);outline-offset:2px;border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .wrap{max-width:44rem;margin:0 auto;padding:0 0 4.5rem;}
+  .label{font-family:var(--f-data);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-3);}
+  .small{font-size:.87rem;line-height:1.55;color:var(--ink-2);}
+  .measure{max-width:var(--measure);}
+
+  .cover{background:linear-gradient(160deg,var(--cover-1),var(--cover-2));color:var(--cover-ink);padding:2.6rem 1.35rem 2.3rem;display:flex;flex-direction:column;gap:1.15rem;}
+  .cover-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .mark{width:2.1rem;height:2.1rem;border:1px solid rgba(243,238,221,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:.95rem;flex:none;}
+  .cover-eyebrow{font-family:var(--f-data);font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--cover-ink-2);}
+  .cover h1{font-size:clamp(1.9rem,7vw,2.5rem);color:var(--cover-ink);max-width:22ch;}
+  .cover .sub{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.02rem;color:var(--cover-ink-2);max-width:32ch;line-height:1.45;}
+  .cover-rule{width:2.3rem;height:2px;background:var(--rust);}
+  .cover-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:.6rem;border-top:1px solid rgba(243,238,221,.16);font-size:.82rem;color:var(--cover-ink-2);}
+  .cover-foot b{color:var(--cover-ink);font-weight:600;}
+
+  section.block{padding:2.1rem 1.35rem;}
+  .block-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+  .block-head .htext{display:flex;flex-direction:column;gap:.35rem;max-width:28rem;}
+  .block-head h2{font-size:1.3rem;}
+  .block-head p{font-size:.9rem;color:var(--ink-2);}
+  .btn{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--f-data);font-size:.68rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.6rem .95rem;border-radius:3px;cursor:pointer;text-align:center;white-space:nowrap;}
+  .btn:hover{opacity:.88;}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2);}
+
+  .card-grid{display:grid;grid-template-columns:1fr;gap:.85rem;}
+  @media(min-width:38rem){.card-grid{grid-template-columns:1fr 1fr;}}
+  .mv-card{background:var(--card);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);padding:1.05rem 1.15rem;display:flex;flex-direction:column;gap:.75rem;cursor:pointer;min-height:9.5rem;}
+  .mv-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--f-data);font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;width:fit-content;padding:.22rem .55rem;border-radius:20px;}
+  .mv-tag.myth{background:var(--rust-soft);color:var(--rust-ink);}
+  .mv-tag.fact{background:var(--owned-soft);color:var(--owned);}
+  .mv-text{font-family:var(--f-display);font-size:1.02rem;line-height:1.4;font-weight:500;}
+  .mv-card[data-open="true"] .mv-text{font-family:var(--f-body);font-size:.92rem;font-weight:400;line-height:1.55;}
+  .mv-cite{font-family:var(--f-data);font-size:.68rem;color:var(--ink-3);}
+  .mv-hint{margin-top:auto;font-family:var(--f-data);font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);}
+
+  footer{padding:1.6rem 1.35rem 0;display:flex;flex-direction:column;gap:.8rem;}
+  .disclosure{font-size:.8rem;line-height:1.55;color:var(--ink-3);}
+
+  @media print{
+    .mv-card{break-inside:avoid;}
+    .mv-card .mv-text{font-family:var(--f-body)!important;font-size:.92rem!important;font-weight:400!important;}
+    .no-print{display:none!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-eyebrow">A Guide For Women On GLP&#8209;1 Medication</span>
+      <span class="mark">O</span>
+    </div>
+    <h1>GLP-1 Myths, Debunked</h1>
+    <p class="sub">Eight beliefs this guide keeps running into, straightened out.</p>
+    <span class="cover-rule"></span>
+    <div class="cover-foot">
+      <span>Pulled from The GLP-1 Ownership Protocol, chapter by chapter</span>
+      <span>Tap a card to flip it</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="block-head">
+      <div class="htext">
+        <span class="label">8 cards</span>
+        <h2>Tap any card for the fact</h2>
+        <p>Each one is a belief the book runs into more than once, answered in the book's own words.</p>
+      </div>
+      <button class="btn ghost no-print" id="revealAllBtn" type="button">Reveal all</button>
+    </div>
+    <div class="card-grid" id="cardGrid"></div>
+  </section>
+
+  <footer>
+    <p class="disclosure">This is a summary of positions taken in The GLP-1 Ownership Protocol, not medical advice. It includes no medication dosing guidance of any kind. If exercise, eating, or appetite ever starts to feel compulsive or distressing rather than manageable, please talk to your prescriber or another qualified professional directly.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var PAIRS = [
+    {
+      myth:"Using a GLP‑1 is cheating, or the easy way out.",
+      fact:"It isn't cheating. It isn't taking the easy way out. For many women, it is the first intervention that has made meaningful weight loss possible after years of trying everything else.",
+      cite:"Chapter 1 — The Two Endgames"
+    },
+    {
+      myth:"The weight I'm losing isn't really mine — the drug is doing all the work.",
+      fact:"The medication gives you something incredibly valuable: breathing room. Renting was the right first move, and it's how everybody starts. The question is what you build in that space.",
+      cite:"Introduction / Chapter 3 — Owned vs. Rented"
+    },
+    {
+      myth:"If I want to own my result, I need to get off the medication.",
+      fact:"No. That's not the lesson. Trying to overpower the medication defeats the point of having it. The goal isn't to make appetite harder — it's to use the fact that appetite is currently quieter.",
+      cite:"Chapter 4 — Why This Doesn't Mean Fighting the Medication"
+    },
+    {
+      myth:"If the scale is moving, nothing else needs my attention.",
+      fact:"Same medication, same starting point — two very different endings. The difference isn't willpower. It's what got built while the medication was doing its part.",
+      cite:"Chapter 1 — The Two Endgames"
+    },
+    {
+      myth:"Resistance training will make me bulky — I just want to be smaller.",
+      fact:"The Muscle branch isn't about becoming visibly bigger. For most women, especially while eating less, it's about protecting lean mass — not losing useful tissue simply because the scale is moving.",
+      cite:"Chapter 7 — Common Problems & What Actually Fixes Them"
+    },
+    {
+      myth:"I'm too close to reducing my dose for this to be worth starting.",
+      fact:"No. In fact, this may be the moment when the work matters most. Starting earlier gives you more time to build the four assets. But starting later is still starting.",
+      cite:"Chapter 7 — Common Problems & What Actually Fixes Them"
+    },
+    {
+      myth:"If I fall off for a week, I've blown it and have to start over Monday.",
+      fact:"Falling off isn't proof you lack discipline — it's a clue the plan was slightly bigger than the week could carry. Drop back to the Base, then restart the Branch from where you left off, not week one.",
+      cite:"Chapter 7 / Closing — And If You Slip"
+    },
+    {
+      myth:"A stall means the medication has stopped working.",
+      fact:"Sometimes that's true. Usually it isn't. A stall is information, not an emergency — and “give it time” almost never is a real answer on its own.",
+      cite:"Introduction — framing throughout"
+    }
+  ];
+
+  var grid = document.getElementById("cardGrid");
+  var cards = [];
+
+  function buildCard(pair){
+    var card = document.createElement("div");
+    card.className = "mv-card";
+    card.setAttribute("data-open", "false");
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+
+    function draw(){
+      var open = card.getAttribute("data-open") === "true";
+      if(!open){
+        card.innerHTML =
+          '<span class="mv-tag myth">Myth</span>'+
+          '<span class="mv-text">'+pair.myth+'</span>'+
+          '<span class="mv-hint">Tap for the fact &rarr;</span>';
+      } else {
+        card.innerHTML =
+          '<span class="mv-tag fact">Fact</span>'+
+          '<span class="mv-text">'+pair.fact+'</span>'+
+          '<span class="mv-cite">'+pair.cite+'</span>';
+      }
+    }
+    card.addEventListener("click", function(){
+      card.setAttribute("data-open", card.getAttribute("data-open") === "true" ? "false" : "true");
+      draw();
+    });
+    card.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); card.click(); }
+    });
+    draw();
+    cards.push(card);
+    return card;
+  }
+
+  PAIRS.forEach(function(pair){ grid.appendChild(buildCard(pair)); });
+
+  var revealAllBtn = document.getElementById("revealAllBtn");
+  var allOpen = false;
+  revealAllBtn.addEventListener("click", function(){
+    allOpen = !allOpen;
+    revealAllBtn.textContent = allOpen ? "Hide all" : "Reveal all";
+    cards.forEach(function(card, i){
+      var pair = PAIRS[i];
+      card.setAttribute("data-open", allOpen ? "true" : "false");
+      card.innerHTML = allOpen
+        ? '<span class="mv-tag fact">Fact</span><span class="mv-text">'+pair.fact+'</span><span class="mv-cite">'+pair.cite+'</span>'
+        : '<span class="mv-tag myth">Myth</span><span class="mv-text">'+pair.myth+'</span><span class="mv-hint">Tap for the fact &rarr;</span>';
+    });
+  });
+})();
+</script>
+</body>
+</html>

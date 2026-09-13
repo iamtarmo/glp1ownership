@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Easy Meals Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F2E4; --card:#FFFFFF; --card-2:#EFE6CE;
+    --ink:#20301F; --ink-2:#5B6353; --ink-3:#8B9280;
+    --line:#E3D9BE; --line-2:#CFC29D;
+    --rust:#B5502E; --rust-soft:#F1DCCB; --rust-ink:#7C3016;
+    --owned:#2F6B45; --owned-soft:#DEEAE0;
+    --cover-1:#233423; --cover-2:#16211A; --cover-ink:#F3EEDD; --cover-ink-2:#C9C29B;
+    --shadow:0 1px 2px rgba(32,48,31,.05), 0 8px 24px -10px rgba(32,48,31,.18);
+    --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --f-body:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-data:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure:36rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+      --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+      --line:#333A24; --line-2:#454C30;
+      --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+      --owned:#63AD82; --owned-soft:#1E3125;
+      --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+    --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+    --line:#333A24; --line-2:#454C30;
+    --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+    --owned:#63AD82; --owned-soft:#1E3125;
+    --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;line-height:1.16;margin:0;color:inherit;}
+  p{margin:0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  button{font-family:inherit;}
+  a{color:var(--rust-ink);}
+  .num{font-variant-numeric:tabular-nums;}
+  :focus-visible{outline:2px solid var(--owned);outline-offset:2px;border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .wrap{max-width:40rem;margin:0 auto;padding:0 0 4.5rem;}
+  .label{font-family:var(--f-data);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-3);}
+  .small{font-size:.87rem;line-height:1.55;color:var(--ink-2);}
+  .measure{max-width:var(--measure);}
+
+  /* ---------------- cover band ---------------- */
+  .cover{background:linear-gradient(160deg,var(--cover-1),var(--cover-2));color:var(--cover-ink);padding:2.6rem 1.35rem 2.3rem;display:flex;flex-direction:column;gap:1.15rem;}
+  .cover-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .mark{width:2.1rem;height:2.1rem;border:1px solid rgba(243,238,221,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:.95rem;flex:none;}
+  .cover-eyebrow{font-family:var(--f-data);font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--cover-ink-2);}
+  .cover h1{font-size:clamp(1.9rem,7vw,2.5rem);color:var(--cover-ink);max-width:22ch;}
+  .cover .sub{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.02rem;color:var(--cover-ink-2);max-width:32ch;line-height:1.45;}
+  .cover-rule{width:2.3rem;height:2px;background:var(--rust);}
+  .cover-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:.6rem;border-top:1px solid rgba(243,238,221,.16);font-size:.82rem;color:var(--cover-ink-2);}
+  .cover-foot b{color:var(--cover-ink);font-weight:600;}
+
+  /* ---------------- sections ---------------- */
+  section.block{padding:2.1rem 1.35rem;border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:none;}
+  .block-head{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.3rem;}
+  .block-head h2{font-size:1.35rem;}
+  .block-head p{font-size:.92rem;color:var(--ink-2);}
+
+  /* ---------------- sample banner ---------------- */
+  .sample-banner{margin:0 1.35rem 0;background:var(--rust-soft);border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:3px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.6rem;transform:translateY(-1.1rem);}
+  .sample-banner p{font-size:.87rem;line-height:1.5;color:var(--ink);}
+  .sample-banner .tag{font-family:var(--f-data);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rust-ink);}
+  .btn{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--f-data);font-size:.7rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.62rem 1rem;border-radius:3px;cursor:pointer;text-align:center;width:fit-content;}
+  .btn:hover{opacity:.88;}
+  .btn.owned{background:var(--owned);border-color:var(--owned);color:#fff;}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2);}
+  .link-btn{background:none;border:none;padding:0;font-family:var(--f-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+
+  /* ---------------- chip pickers ---------------- */
+  .chip-group{display:flex;flex-wrap:wrap;gap:.55rem;}
+  .chip{border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);font-size:.86rem;line-height:1.3;padding:.55rem .85rem;border-radius:20px;cursor:pointer;text-align:left;}
+  .chip:hover{border-color:var(--owned);}
+  .chip[data-sel="true"]{background:var(--owned-soft);border-color:var(--owned);color:var(--ink);font-weight:600;}
+  .build-row{display:flex;justify-content:center;padding-top:1.6rem;}
+
+  /* ---------------- go-to list card ---------------- */
+  .list-wrap{display:flex;justify-content:center;}
+  .list-card{width:100%;max-width:26rem;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.3rem 1.4rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.2rem;}
+  .list-card .lc-tab{background:var(--rust);color:#fff;font-family:var(--f-data);font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .55rem;border-radius:3px;width:fit-content;margin-bottom:.7rem;}
+  .list-card h3{font-size:1.1rem;margin-bottom:.15rem;}
+  .list-card .lc-sub{font-size:.78rem;color:var(--ink-3);font-family:var(--f-data);margin-bottom:.9rem;}
+  .list-empty{font-size:.87rem;color:var(--ink-3);font-style:italic;line-height:1.5;padding:.4rem 0 .2rem;}
+  .list-note{font-size:.8rem;color:var(--rust-ink);background:var(--rust-soft);border-radius:5px;padding:.5rem .7rem;margin-bottom:.7rem;}
+  .meal-item{display:flex;gap:.75rem;padding:.7rem 0;border-top:1px dashed var(--line);}
+  .meal-item:first-of-type{border-top:none;}
+  .meal-n{font-family:var(--f-data);font-size:.78rem;color:var(--ink-3);padding-top:.1rem;flex:none;width:1.1rem;}
+  .meal-body{display:flex;flex-direction:column;gap:.2rem;}
+  .meal-name{font-family:var(--f-display);font-weight:600;font-size:.98rem;}
+  .meal-why{font-size:.85rem;color:var(--ink-2);line-height:1.45;}
+  .meal-g{font-family:var(--f-data);font-size:.72rem;color:var(--owned);}
+
+  footer{padding:1.6rem 1.35rem 0;display:flex;flex-direction:column;gap:.8rem;}
+  .disclosure{font-size:.8rem;line-height:1.55;color:var(--ink-3);}
+  .print-row{display:flex;justify-content:center;padding-top:.3rem;}
+
+  @media print{
+    body{background:#fff;}
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{position:absolute;top:0;left:0;width:100%;display:flex!important;justify-content:center;padding:2rem 0;}
+    .no-print{display:none!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-eyebrow">A Guide For Women On GLP&#8209;1 Medication</span>
+      <span class="mark">O</span>
+    </div>
+    <h1>Easy Meals Generator</h1>
+    <p class="sub">Built from the Fuel Branch of The GLP-1 Ownership Protocol, Week 3.</p>
+    <span class="cover-rule"></span>
+    <div class="cover-foot">
+      <span>Your <b>emergency menu</b> for low-appetite days</span>
+      <span>5&ndash;7 meals, decided once</span>
+    </div>
+  </div>
+
+  <div id="sampleBanner"></div>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="label">Step 1 &middot; Protein sources</span>
+      <h2>Which do you actually reach for?</h2>
+      <p class="measure">Not what you think you should eat &mdash; what you'll genuinely make again. Pick as many as apply.</p>
+    </div>
+    <div class="chip-group" id="proteinChips"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="label">Step 2 &middot; Staples</span>
+      <h2>Anything you want built in?</h2>
+      <p class="measure">Optional &mdash; these nudge the list, they don't rule anything out.</p>
+    </div>
+    <div class="chip-group" id="stapleChips"></div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <span class="label">Step 3 &middot; Notes</span>
+      <h2>Anything to steer around?</h2>
+      <p class="measure">These do rule things out.</p>
+    </div>
+    <div class="chip-group" id="noteChips"></div>
+    <div class="build-row"><button class="btn owned" id="buildBtn" type="button">Build my go-to list</button></div>
+  </section>
+
+  <section class="block" id="cardSection">
+    <div class="block-head">
+      <span class="label">Your emergency menu</span>
+      <h2>Five to seven meals you already know work</h2>
+      <p class="measure">Easy. Nutritionally solid. High enough in protein. Real food. Actually enjoyable enough that you'll eat them again.</p>
+    </div>
+    <div class="list-wrap"><div class="list-card" id="listMount"></div></div>
+    <div class="print-row no-print" style="margin-top:1.1rem;"><button class="btn" id="printBtn" type="button">Print my list</button></div>
+  </section>
+
+  <footer>
+    <p class="disclosure">This guide is a self-assessment and lifestyle framework, not a medical diagnosis or treatment plan. It includes no medication dosing guidance of any kind. Protein figures are approximate and meant as general background &mdash; ask your prescriber or a registered dietitian about your own target. If exercise, eating, or appetite ever starts to feel compulsive or distressing rather than manageable, please talk to a qualified professional directly.</p>
+    <div class="print-row"><button class="link-btn no-print" id="resetBtn" type="button">Clear my picks and start over</button></div>
+  </footer>
+
+  <div id="printArea" style="display:none;"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORE_KEY = "ownershipProtocolGoToList_v1";
+
+  var PROTEINS = [
+    {key:"eggs", label:"Eggs"},
+    {key:"dairy", label:"Greek yogurt / cottage cheese"},
+    {key:"chicken", label:"Chicken"},
+    {key:"fish", label:"Fish / seafood"},
+    {key:"beef", label:"Beef"},
+    {key:"legumes", label:"Tofu / beans / lentils"},
+    {key:"shake", label:"Protein shake or powder"},
+    {key:"deli", label:"Deli meat / cheese"}
+  ];
+  var STAPLES = [
+    {key:"rice", label:"Rice"},
+    {key:"potato", label:"Potatoes"},
+    {key:"bread", label:"Bread"},
+    {key:"oats", label:"Oats"},
+    {key:"lowcarb", label:"Keep it low-carb"}
+  ];
+  var NOTES = [
+    {key:"vegetarian", label:"Vegetarian"},
+    {key:"dairyfree", label:"Dairy-free"},
+    {key:"noredmeat", label:"No red meat"},
+    {key:"quick", label:"Under 10 minutes"},
+    {key:"freezer", label:"Freezer / batch-friendly"}
+  ];
+
+  var MEALS = [
+    {name:"Two eggs, toast, half an avocado", protein:["eggs"], staple:["bread"], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:false, g:16, why:"Ten minutes, no recipe."},
+    {name:"Greek yogurt bowl, berries, a scoop of protein powder", protein:["dairy","shake"], staple:[], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:30, why:"Barely counts as cooking."},
+    {name:"Cottage cheese, pineapple, a handful of almonds", protein:["dairy"], staple:[], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:24, why:"Sweet and savory in one bowl."},
+    {name:"Rotisserie chicken, microwave rice, frozen veg", protein:["chicken"], staple:["rice"], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:true, g:35, why:"Built entirely from shortcuts."},
+    {name:"Canned tuna, crackers, a boiled egg", protein:["fish","eggs"], staple:[], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:false, g:28, why:"Lives in the pantry, not the fridge."},
+    {name:"Protein shake, a banana", protein:["shake"], staple:[], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:false, g:25, why:"For the days even chewing feels like a lot."},
+    {name:"Turkey and cheese roll-ups, baby carrots", protein:["deli"], staple:[], veg:false, dairyfree:false, redmeat:false, quick:true, freezer:false, g:22, why:"No plate required."},
+    {name:"Scrambled eggs, black beans, salsa", protein:["eggs","legumes"], staple:[], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:false, g:24, why:"Breakfast tacos without the tortilla, if you want."},
+    {name:"Leftover salmon, roasted potatoes", protein:["fish"], staple:["potato"], veg:false, dairyfree:true, redmeat:false, quick:false, freezer:false, g:32, why:"Reheats better than most things."},
+    {name:"Canned lentil soup, a slice of bread", protein:["legumes"], staple:["bread"], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:true, g:18, why:"One pot, freezes in portions."},
+    {name:"Ground beef and rice skillet, batch-cooked", protein:["beef"], staple:["rice"], veg:false, dairyfree:true, redmeat:true, quick:false, freezer:true, g:30, why:"Cook once, eat four times."},
+    {name:"Chickpea and tuna salad over greens", protein:["fish","legumes"], staple:[], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:false, g:26, why:"No stove involved."},
+    {name:"Egg muffins, made ahead", protein:["eggs"], staple:[], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:true, g:18, why:"Bake once on Sunday, grab all week."},
+    {name:"Tofu stir-fry, frozen veg, rice", protein:["legumes"], staple:["rice"], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:false, g:20, why:"Whatever vegetables are already in the freezer."},
+    {name:"Deli turkey and hummus wrap", protein:["deli","legumes"], staple:["bread"], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:false, g:24, why:"Built in the time it takes to think about it."},
+    {name:"Protein oats with peanut butter", protein:["shake","dairy"], staple:["oats"], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:28, why:"Breakfast that actually holds you."},
+    {name:"Batch-grilled chicken thighs, sweet potato", protein:["chicken"], staple:["potato"], veg:false, dairyfree:true, redmeat:false, quick:false, freezer:true, g:34, why:"The default when you can't think of anything."},
+    {name:"Cottage cheese toast, everything seasoning", protein:["dairy"], staple:["bread"], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:20, why:"Weirdly good. Trust it."},
+    {name:"Canned salmon patties, side salad", protein:["fish"], staple:[], veg:false, dairyfree:true, redmeat:false, quick:false, freezer:false, g:26, why:"Pantry can, fresh feel."},
+    {name:"Black bean quesadilla", protein:["legumes"], staple:["bread"], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:18, why:"Ready before the pan's fully hot."},
+    {name:"Jerky, string cheese, an apple", protein:["beef","dairy"], staple:[], veg:false, dairyfree:false, redmeat:true, quick:true, freezer:false, g:20, why:"Zero cooking, zero dishes."},
+    {name:"Shrimp stir-fry, frozen veg", protein:["fish"], staple:[], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:false, g:28, why:"Thaws fast, cooks faster."},
+    {name:"Overnight oats, Greek yogurt, chia", protein:["dairy"], staple:["oats"], veg:true, dairyfree:false, redmeat:false, quick:true, freezer:false, g:22, why:"Made the night before you need it."},
+    {name:"Chicken sausage and egg scramble", protein:["chicken","eggs"], staple:[], veg:false, dairyfree:true, redmeat:false, quick:true, freezer:false, g:30, why:"One pan, savory, filling."},
+    {name:"Edamame, a hard-boiled egg, rice cake", protein:["legumes","eggs"], staple:["rice"], veg:true, dairyfree:true, redmeat:false, quick:true, freezer:false, g:18, why:"Assembled, not cooked."},
+    {name:"Leftover steak bites, roasted broccoli", protein:["beef"], staple:[], veg:false, dairyfree:true, redmeat:true, quick:false, freezer:false, g:32, why:"Makes yesterday's dinner today's fix."}
+  ];
+
+  function sampleState(){
+    return { sample:true, proteins:["eggs","chicken"], staples:["rice"], notes:["quick"], list:null };
+  }
+  function blankState(){
+    return { sample:false, proteins:[], staples:[], notes:[], list:null };
+  }
+
+  var state;
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    state = raw ? JSON.parse(raw) : sampleState();
+  }catch(e){ state = sampleState(); }
+  if(state.sample && !state.list){ state.list = buildList(state); }
+
+  function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function toggle(arr, key){
+    var i = arr.indexOf(key);
+    if(i === -1) arr.push(key); else arr.splice(i,1);
+  }
+
+  function renderChips(mount, options, selectedArr){
+    mount.innerHTML = "";
+    options.forEach(function(opt){
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chip";
+      chip.setAttribute("data-sel", selectedArr.indexOf(opt.key) > -1 ? "true" : "false");
+      chip.textContent = opt.label;
+      chip.addEventListener("click", function(){
+        state.sample = false;
+        toggle(selectedArr, opt.key);
+        save();
+        renderBanner();
+        chip.setAttribute("data-sel", selectedArr.indexOf(opt.key) > -1 ? "true" : "false");
+      });
+      mount.appendChild(chip);
+    });
+  }
+
+  function buildList(st){
+    var lowcarb = st.staples.indexOf("lowcarb") > -1;
+    var hardOk = MEALS.filter(function(m){
+      if(st.notes.indexOf("vegetarian") > -1 && !m.veg) return false;
+      if(st.notes.indexOf("dairyfree") > -1 && !m.dairyfree) return false;
+      if(st.notes.indexOf("noredmeat") > -1 && m.redmeat) return false;
+      if(st.notes.indexOf("quick") > -1 && !m.quick) return false;
+      if(st.notes.indexOf("freezer") > -1 && !m.freezer) return false;
+      if(lowcarb && m.staple.length) return false;
+      return true;
+    });
+
+    function score(m){
+      var s = 0;
+      m.protein.forEach(function(p){ if(st.proteins.indexOf(p) > -1) s += 3; });
+      m.staple.forEach(function(sp){ if(st.staples.indexOf(sp) > -1) s += 1; });
+      return s;
+    }
+
+    var pool = hardOk.slice();
+    var usedProteinFilter = st.proteins.length > 0;
+    if(usedProteinFilter){
+      var matched = hardOk.filter(function(m){ return m.protein.some(function(p){ return st.proteins.indexOf(p) > -1; }); });
+      if(matched.length >= 5) pool = matched;
+    }
+
+    pool.sort(function(a,b){ return score(b) - score(a); });
+
+    var picked = [], countByProtein = {};
+    pool.forEach(function(m){
+      if(picked.length >= 7) return;
+      var primary = m.protein[0];
+      countByProtein[primary] = countByProtein[primary] || 0;
+      if(countByProtein[primary] >= 3) return;
+      picked.push(m);
+      countByProtein[primary]++;
+    });
+    if(picked.length < 5){
+      hardOk.forEach(function(m){
+        if(picked.length >= 5 && picked.length >= Math.min(5, hardOk.length)) return;
+        if(picked.indexOf(m) === -1 && picked.length < 7) picked.push(m);
+      });
+    }
+    return { meals: picked.slice(0,7), loosened: usedProteinFilter && pool !== hardOk ? false : (usedProteinFilter && pool.length < 5) };
+  }
+
+  function renderBanner(){
+    var mount = document.getElementById("sampleBanner");
+    if(!state.sample){ mount.innerHTML = ""; return; }
+    mount.innerHTML =
+      '<div class="sample-banner">'+
+      '<span class="tag">Example</span>'+
+      '<p>Showing an example list for eggs, chicken, rice, quick meals. Pick your own above, then rebuild it.</p>'+
+      '<div><button class="btn owned" id="startRealBtn" type="button">Start mine</button></div>'+
+      '</div>';
+    document.getElementById("startRealBtn").addEventListener("click", function(){
+      state = blankState();
+      save();
+      renderAll();
+    });
+  }
+
+  function listHTML(){
+    var html = '<span class="lc-tab">Emergency menu</span>';
+    html += '<h3>My go-to list</h3><span class="lc-sub">The GLP-1 Ownership Protocol &middot; Fuel Branch</span>';
+    if(!state.list || !state.list.meals.length){
+      html += '<p class="list-empty">Make your picks above, then tap &ldquo;Build my go-to list.&rdquo;</p>';
+      return html;
+    }
+    if(state.list.meals.length < 5){
+      html += '<div class="list-note">Your notes ruled out a lot of meals — this list is shorter than five. Loosen a filter above to fill it out.</div>';
+    }
+    state.list.meals.forEach(function(m, i){
+      html += '<div class="meal-item"><span class="meal-n">'+(i+1)+'</span><div class="meal-body">'+
+        '<span class="meal-name">'+m.name+'</span>'+
+        '<span class="meal-why">'+m.why+'</span>'+
+        '<span class="meal-g">~'+m.g+'g protein</span>'+
+        '</div></div>';
+    });
+    return html;
+  }
+
+  function renderList(){
+    document.getElementById("listMount").innerHTML = listHTML();
+    document.getElementById("printArea").innerHTML = '<div class="list-card" style="max-width:26rem;">'+listHTML()+'</div>';
+  }
+
+  document.getElementById("buildBtn").addEventListener("click", function(){
+    state.sample = false;
+    state.list = buildList(state);
+    save();
+    renderBanner();
+    renderList();
+    document.getElementById("cardSection").scrollIntoView({behavior:"smooth"});
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    state = blankState();
+    save();
+    renderAll();
+    document.getElementById("top").scrollIntoView({behavior:"smooth"});
+  });
+
+  function renderAll(){
+    renderBanner();
+    renderChips(document.getElementById("proteinChips"), PROTEINS, state.proteins);
+    renderChips(document.getElementById("stapleChips"), STAPLES, state.staples);
+    renderChips(document.getElementById("noteChips"), NOTES, state.notes);
+    renderList();
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

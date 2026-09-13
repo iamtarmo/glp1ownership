@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 const SENDER = { name: 'GLP-1 Ownership', email: 'support@glp1ownership.com' };
+const ACCESS_URL = 'https://www.glp1ownership.com/access';
 const SIGNATURE_TOLERANCE_SECONDS = 300;
 
 function signatureIsValid(rawBody, header, secret) {
@@ -49,9 +50,10 @@ function confirmationHtml(firstName) {
       <li>GLP-1 Myths, Debunked</li>
     </ul>
 
-    <div style="background:#DEEAE0;border-radius:11px;padding:18px 20px;margin:0 0 20px;">
-      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.12em;color:#2F6B45;font-weight:700;">YOUR ACCESS</p>
-      <p style="margin:0;font-size:14px;line-height:1.6;">Your access links will arrive in a follow-up email shortly.</p>
+    <div style="background:#DEEAE0;border-radius:11px;padding:18px 20px;margin:0 0 20px;text-align:center;">
+      <p style="margin:0 0 12px;font-size:11px;letter-spacing:0.12em;color:#2F6B45;font-weight:700;">YOUR ACCESS</p>
+      <a href="${ACCESS_URL}" style="display:inline-block;background:#2F6B45;color:#F7F2E4;text-decoration:none;font-weight:700;font-size:15px;padding:14px 26px;border-radius:9px;">Open your protocol and tools &rarr;</a>
+      <p style="margin:12px 0 0;font-size:13px;line-height:1.6;color:rgba(32,48,31,0.75);">Bookmark this page &mdash; it's where your guide and all five tools live.</p>
     </div>
 
     <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">Your purchase is covered by a 30-day money-back guarantee. If it isn't right for you, just reply to this email within 30 days and we'll refund you in full.</p>

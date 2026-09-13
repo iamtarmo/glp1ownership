@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The 4-Week Ownership Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F2E4; --card:#FFFFFF; --card-2:#EFE6CE;
+    --ink:#20301F; --ink-2:#5B6353; --ink-3:#8B9280;
+    --line:#E3D9BE; --line-2:#CFC29D;
+    --rust:#B5502E; --rust-soft:#F1DCCB; --rust-ink:#7C3016;
+    --owned:#2F6B45; --owned-soft:#DEEAE0;
+    --cover-1:#233423; --cover-2:#16211A; --cover-ink:#F3EEDD; --cover-ink-2:#C9C29B;
+    --shadow:0 1px 2px rgba(32,48,31,.05), 0 8px 24px -10px rgba(32,48,31,.18);
+    --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --f-body:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-data:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure:38rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+      --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+      --line:#333A24; --line-2:#454C30;
+      --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+      --owned:#63AD82; --owned-soft:#1E3125;
+      --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+    --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+    --line:#333A24; --line-2:#454C30;
+    --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+    --owned:#63AD82; --owned-soft:#1E3125;
+    --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;line-height:1.16;margin:0;color:inherit;}
+  p{margin:0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  button{font-family:inherit;}
+  a{color:var(--rust-ink);}
+  .num{font-variant-numeric:tabular-nums;}
+  :focus-visible{outline:2px solid var(--owned);outline-offset:2px;border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .wrap{max-width:44rem;margin:0 auto;padding:0 0 4.5rem;}
+  .pad{padding-left:1.35rem;padding-right:1.35rem;}
+  .label{font-family:var(--f-data);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-3);}
+  .small{font-size:.87rem;line-height:1.55;color:var(--ink-2);}
+  .measure{max-width:var(--measure);}
+
+  /* ---------------- cover band ---------------- */
+  .cover{background:linear-gradient(160deg,var(--cover-1),var(--cover-2));color:var(--cover-ink);padding:2.6rem 1.35rem 2.3rem;display:flex;flex-direction:column;gap:1.15rem;}
+  .cover-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .mark{width:2.1rem;height:2.1rem;border:1px solid rgba(243,238,221,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:.95rem;flex:none;}
+  .cover-eyebrow{font-family:var(--f-data);font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--cover-ink-2);}
+  .cover h1{font-size:clamp(1.9rem,7vw,2.5rem);color:var(--cover-ink);max-width:22ch;}
+  .cover .sub{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.02rem;color:var(--cover-ink-2);max-width:32ch;line-height:1.45;}
+  .cover-rule{width:2.3rem;height:2px;background:var(--rust);}
+  .cover-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:.6rem;border-top:1px solid rgba(243,238,221,.16);font-size:.82rem;color:var(--cover-ink-2);}
+  .cover-foot b{color:var(--cover-ink);font-weight:600;}
+
+  /* ---------------- sections ---------------- */
+  section.block{padding:2.1rem 1.35rem;border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:none;}
+  .block-head{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.3rem;}
+  .block-head .eyebrow-row{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;}
+  .block-head h2{font-size:1.35rem;}
+  .block-head p{font-size:.92rem;color:var(--ink-2);}
+
+  /* ---------------- sample banner ---------------- */
+  .sample-banner{margin:0 1.35rem 0;background:var(--rust-soft);border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:3px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.6rem;transform:translateY(-1.1rem);}
+  .sample-banner p{font-size:.87rem;line-height:1.5;color:var(--ink);}
+  .sample-banner .tag{font-family:var(--f-data);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rust-ink);}
+  .btn{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--f-data);font-size:.7rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.62rem 1rem;border-radius:3px;cursor:pointer;text-align:center;width:fit-content;}
+  .btn:hover{opacity:.88;}
+  .btn.owned{background:var(--owned);border-color:var(--owned);color:#fff;}
+  .link-btn{background:none;border:none;padding:0;font-family:var(--f-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+
+  /* ---------------- branch picker ---------------- */
+  .branch-grid{display:grid;grid-template-columns:1fr;gap:.65rem;}
+  @media(min-width:34rem){.branch-grid{grid-template-columns:1fr 1fr;}}
+  .branch-card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.95rem 1.05rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;box-shadow:var(--shadow);}
+  .branch-card:hover{border-color:var(--owned);}
+  .branch-card[data-sel="true"]{border-color:var(--owned);background:var(--owned-soft);}
+  .branch-card .bn{font-family:var(--f-display);font-weight:600;font-size:1.05rem;}
+  .branch-card .bd{font-size:.83rem;color:var(--ink-2);line-height:1.45;}
+  .branch-current{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;}
+  .branch-current .chip{font-family:var(--f-data);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;background:var(--owned-soft);color:var(--owned);border-radius:20px;padding:.3rem .65rem;}
+
+  /* ---------------- base weekly tables ---------------- */
+  .week-card{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);margin-bottom:1rem;overflow:hidden;}
+  .week-card:last-child{margin-bottom:0;}
+  .week-title{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;padding:.8rem 1.05rem;border-bottom:1px solid var(--line);}
+  .week-title h3{font-size:.98rem;}
+  .week-title .n{font-family:var(--f-data);font-size:.72rem;color:var(--ink-3);}
+  .grid-scroll{overflow-x:auto;}
+  table.base-tbl{border-collapse:collapse;width:100%;min-width:30rem;}
+  table.base-tbl th,table.base-tbl td{padding:.55rem .6rem;text-align:left;border-bottom:1px solid var(--line);}
+  table.base-tbl tr:last-child th,table.base-tbl tr:last-child td{border-bottom:none;}
+  table.base-tbl thead th{font-family:var(--f-data);font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#fff;background:var(--ink);}
+  table.base-tbl thead th.asset-h{background:var(--rust);}
+  table.base-tbl thead th.day-h{text-align:center;font-variant-numeric:tabular-nums;width:2.1rem;}
+  table.base-tbl td.asset-cell{font-weight:600;font-size:.85rem;white-space:nowrap;}
+  table.base-tbl td.action-cell{font-size:.8rem;color:var(--ink-2);line-height:1.4;min-width:11rem;}
+  table.base-tbl td.day-cell{text-align:center;}
+  table.base-tbl input[type=checkbox]{width:1.05rem;height:1.05rem;accent-color:var(--owned);cursor:pointer;}
+
+  /* ---------------- branch table ---------------- */
+  .locked{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.1rem;font-size:.9rem;color:var(--ink-2);}
+  .branch-tbl{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card);box-shadow:var(--shadow);}
+  .wk-row{display:grid;grid-template-columns:3.3rem 1fr 2.3rem;gap:.85rem;padding:.9rem 1.05rem;border-bottom:1px solid var(--line);align-items:flex-start;}
+  .wk-row:last-child{border-bottom:none;}
+  .wk-row[data-done="true"]{background:var(--owned-soft);}
+  .wk-num{font-family:var(--f-data);font-size:.72rem;color:var(--ink-3);padding-top:.2rem;}
+  .wk-row[data-done="true"] .wk-num{color:var(--owned);font-weight:600;}
+  .wk-body summary{list-style:none;cursor:pointer;font-family:var(--f-display);font-weight:600;font-size:.98rem;line-height:1.4;}
+  .wk-body summary::-webkit-details-marker{display:none;}
+  .wk-body summary::before{content:"+ ";color:var(--ink-3);font-family:var(--f-data);}
+  .wk-body[open] summary::before{content:"\2212 ";}
+  .wk-body .detail{font-size:.85rem;color:var(--ink-2);line-height:1.55;margin-top:.4rem;}
+  .wk-check{padding-top:.15rem;}
+  .wk-check input{width:1.15rem;height:1.15rem;accent-color:var(--owned);cursor:pointer;}
+  .progress-line{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:.85rem;}
+  .progress-line .n{font-family:var(--f-data);font-size:.82rem;color:var(--ink-2);}
+
+  /* ---------------- keep + slip cards ---------------- */
+  .keep-card{background:var(--card-2);border:1px solid var(--line-2);border-radius:8px;padding:1.15rem 1.25rem;display:flex;flex-direction:column;gap:.75rem;}
+  .keep-card ol{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:.4rem;font-size:.92rem;line-height:1.5;}
+  .keep-line{text-align:center;font-family:var(--f-display);font-style:italic;font-size:.98rem;color:var(--ink-2);padding-top:.3rem;border-top:1px dashed var(--line-2);}
+
+  .slip-card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--rust);border-radius:6px;padding:1.05rem 1.15rem;display:flex;flex-direction:column;gap:.4rem;}
+  .slip-card .st{font-family:var(--f-data);font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rust-ink);}
+  .slip-card p{font-size:.93rem;line-height:1.55;}
+
+  footer{padding:1.6rem 1.35rem 0;display:flex;flex-direction:column;gap:.8rem;}
+  .disclosure{font-size:.8rem;line-height:1.55;color:var(--ink-3);}
+  .print-row{display:flex;justify-content:center;padding-top:.3rem;}
+
+  @media print{
+    body{background:#fff;}
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{position:absolute;top:0;left:0;width:100%;}
+    .cover{background:#fff!important;color:#20301F!important;}
+    .cover .sub,.cover-eyebrow,.cover-foot{color:#5B6353!important;}
+    .no-print{display:none!important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-eyebrow">A Guide For Women On GLP&#8209;1 Medication</span>
+      <span class="mark">O</span>
+    </div>
+    <h1>The 4-Week Ownership Tracker</h1>
+    <p class="sub">Your working copy of the Quick Reference page from The GLP-1 Ownership Protocol.</p>
+    <span class="cover-rule"></span>
+    <div class="cover-foot">
+      <span>Based on your <b>Ownership Score</b></span>
+      <span>Muscle &middot; Structure &middot; Fuel &middot; Situations</span>
+    </div>
+  </div>
+
+  <div id="sampleBanner"></div>
+
+  <section class="block" id="branchSection">
+    <div class="block-head">
+      <div class="eyebrow-row"><span class="label">Your Branch</span></div>
+      <h2>Which one did your Ownership Score flag?</h2>
+      <p class="measure">Pick the asset your score named as your leak. The other three stay at Base level &mdash; you can change this any time without losing what you've already checked off below.</p>
+    </div>
+    <div id="branchCurrent"></div>
+    <div class="branch-grid" id="branchGrid"></div>
+  </section>
+
+  <section class="block" id="baseSection">
+    <div class="block-head">
+      <div class="eyebrow-row"><span class="label">The Base &middot; every day, every week, regardless of Branch</span></div>
+      <h2>Four things, every day, for all four weeks</h2>
+      <p class="measure">None of these are dramatic. Keep them going the whole time you're working your Branch below &mdash; they're what stays even after the four weeks end.</p>
+    </div>
+    <div id="baseMount"></div>
+  </section>
+
+  <section class="block" id="yourBranchSection">
+    <div class="block-head">
+      <div class="eyebrow-row"><span class="label">Your Branch &middot; four weeks</span></div>
+      <h2 id="branchTitle">Your four-week deep dive</h2>
+      <p class="measure" id="branchSub">Fix the leak first. The other three assets stay maintained at Base level and get their turn later.</p>
+    </div>
+    <div class="progress-line" id="branchProgress"></div>
+    <div id="branchTblMount"></div>
+  </section>
+
+  <section class="block" id="afterSection">
+    <div class="block-head">
+      <div class="eyebrow-row"><span class="label">After Week Four</span></div>
+      <h2>Three things to keep indefinitely</h2>
+    </div>
+    <div class="keep-card">
+      <ol>
+        <li>Protein at your first meal.</li>
+        <li>Whatever your Branch built, at whatever frequency you landed on by week four &mdash; not the maximum, the sustainable one.</li>
+        <li>The daily Situations check-in. Even off-Branch, it's your early-warning system for the other three assets.</li>
+      </ol>
+      <p class="keep-line">That's it. Three things. Not forty.</p>
+    </div>
+  </section>
+
+  <section class="block" id="slipSection">
+    <div class="block-head">
+      <div class="eyebrow-row"><span class="label">And If You Slip</span></div>
+    </div>
+    <div class="slip-card">
+      <span class="st">The reset</span>
+      <p>Go back to the Base for one week. Exactly as written. No heroic comeback. No punishment. No &ldquo;starting over Monday.&rdquo; Just return to the four basics.</p>
+      <p>Most people find their way back within days &mdash; and the second time is usually easier, because you're not starting from zero. You're returning to something you've already built.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="print-row no-print">
+      <button class="btn" id="printBtn" type="button">Print this page</button>
+    </div>
+    <p class="disclosure">This guide is a self-assessment and lifestyle framework, not a medical diagnosis or treatment plan. It includes no medication dosing guidance of any kind. If exercise, eating, or appetite ever starts to feel compulsive or distressing rather than manageable, or if any symptom feels like more than a normal adjustment, please talk to your prescriber or another qualified professional directly.</p>
+    <div class="print-row"><button class="link-btn no-print" id="resetBtn" type="button">Clear my data and start over</button></div>
+  </footer>
+
+  <!-- printable snapshot, hidden on screen, shown only under @media print -->
+  <div id="printArea" style="display:none;"></div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORE_KEY = "ownershipProtocolBaseBranch_v1";
+
+  var BRANCHES = ["muscle","structure","fuel","situations"];
+
+  var META = {
+    muscle:{ name:"Muscle", sub:"the only asset that's physically load-bearing" },
+    structure:{ name:"Structure", sub:"an eating pattern that runs without appetite suppression holding it up" },
+    fuel:{ name:"Fuel", sub:"real protein and nutrition, not just a smaller number of calories" },
+    situations:{ name:"Situations", sub:"what happens at 6pm, at a restaurant, on a bad week" }
+  };
+
+  var BASE_ACTIONS = {
+    muscle:"Protein-forward food at your first meal.",
+    structure:"Eat at roughly the same few times each day.",
+    fuel:"One full portion of vegetables or fruit.",
+    situations:"Notice one moment you'd have reached for food before."
+  };
+
+  var WEEKS = {
+    muscle:[
+      {t:"2 short resistance sessions", d:"Twenty to thirty minutes each, bodyweight or light weights, full body. Don't chase exhaustion — give your body a reason to keep the muscle it already has. Bring protein into every meal, not just your first."},
+      {t:"Add a 3rd session", d:"If two felt easy, add a little resistance or a few reps. If two felt difficult, stay at two — consistency beats heroics."},
+      {t:"Progressive load", d:"Keep the three sessions, make them slightly harder — a little more resistance, a few more reps. The signal gets stronger through repetition."},
+      {t:"Hold and confirm", d:"Don't add anything new. Are three sessions becoming normal, without a motivational speech first? If it's still a battle, reduce the difficulty — keep the frequency."}
+    ],
+    structure:[
+      {t:"Track your real eating times", d:"Write down when you eat — not what, not how much, just when. Don't change anything yet. You're looking at the actual shape of your day."},
+      {t:"Set 3 rough eating anchors", d:"Choose three rough times that fit your real life and try to land near them most days. They're scaffolding, not prison bars."},
+      {t:"Build one repeatable meal", d:"Pick one meal to make almost automatic: protein, a vegetable, a starch or fat. Vary it however you like — fewer decisions, not boring food."},
+      {t:"Hold and confirm", d:"Are the three anchors becoming automatic? Does the repeatable meal actually get repeated, or did everything drift back toward random? Be honest."}
+    ],
+    fuel:[
+      {t:"Audit one honest day", d:"Write down everything you eat on one normal day — not your healthiest. See the actual gap between eating less and eating well."},
+      {t:"Fix the single biggest gap", d:"Find the single biggest problem, often protein. Fix one thing. Not five — a change you keep beats a plan that lasts four days."},
+      {t:"Build a 5–7 meal go-to list", d:"Meals that are easy, nutritionally solid, high enough in protein, made from real food, and actually enjoyable. Your emergency menu."},
+      {t:"Hold and confirm", d:"Are you using the list, or still grabbing whatever's easiest? Did week two's fix survive, or vanish once it stopped feeling new?"}
+    ],
+    situations:[
+      {t:"Map your top 2–3 triggers", d:"Think back to before the medication. What reliably sent things sideways? Look for the actual scene, not “stress eating.”"},
+      {t:"Build a plan for your top trigger", d:"Decide exactly what you'll do next time it appears — concrete, not “I'll be more mindful.” The more specific, the easier to use under pressure."},
+      {t:"Test the plan live", d:"If the trigger shows up naturally, use the plan. If not, create a low-stakes version on purpose and rehearse while the medication still gives you room."},
+      {t:"Hold and confirm", d:"Did your response hold under actual pressure? If yes, that's evidence, not just a good intention. If not, that's information — look at trigger two."}
+    ]
+  };
+
+  var WEEKS_COUNT = 4, DAYS_PER_WEEK = 7, TOTAL_DAYS = WEEKS_COUNT * DAYS_PER_WEEK;
+
+  function sampleState(){
+    var base = {};
+    ["muscle-1","structure-1","fuel-1","situations-1","muscle-2","fuel-2","muscle-3","structure-3","situations-4","muscle-4","muscle-5"].forEach(function(k){ base[k] = true; });
+    return {
+      sample:true,
+      branch:"muscle",
+      base:base,
+      weekHold:{ muscle:{1:true}, structure:{}, fuel:{}, situations:{} }
+    };
+  }
+
+  function blankState(){
+    return { sample:false, branch:null, base:{}, weekHold:{ muscle:{}, structure:{}, fuel:{}, situations:{} } };
+  }
+
+  var state;
+  try{
+    var raw = localStorage.getItem(STORE_KEY);
+    state = raw ? JSON.parse(raw) : sampleState();
+    if(!state.weekHold) state.weekHold = { muscle:{}, structure:{}, fuel:{}, situations:{} };
+  }catch(e){ state = sampleState(); }
+
+  function save(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  // ---------------- sample banner ----------------
+
+  function renderBanner(){
+    var mount = document.getElementById("sampleBanner");
+    if(!state.sample){ mount.innerHTML = ""; return; }
+    mount.innerHTML =
+      '<div class="sample-banner">'+
+      '<span class="tag">Example</span>'+
+      '<p>This is a filled-in example — Muscle picked as the Branch, week one under way. Tap any Branch below to clear it and start tracking your own.</p>'+
+      '<div><button class="btn owned" id="startRealBtn" type="button">Start mine</button></div>'+
+      '</div>';
+    document.getElementById("startRealBtn").addEventListener("click", function(){
+      state = blankState();
+      save();
+      renderAll();
+    });
+  }
+
+  // ---------------- branch picker ----------------
+
+  function selectBranch(key){
+    state.branch = key;
+    state.sample = false;
+    if(!state.weekHold[key]) state.weekHold[key] = {};
+    save();
+    renderAll();
+  }
+
+  function renderBranchPicker(){
+    var current = document.getElementById("branchCurrent");
+    if(state.branch){
+      current.innerHTML = '<div class="branch-current"><span class="label">Currently tracking</span><span class="chip">'+META[state.branch].name+'</span></div>';
+    } else {
+      current.innerHTML = '';
+    }
+
+    var grid = document.getElementById("branchGrid");
+    grid.innerHTML = "";
+    BRANCHES.forEach(function(key){
+      var m = META[key];
+      var card = document.createElement("button");
+      card.type = "button";
+      card.className = "branch-card";
+      card.setAttribute("data-sel", state.branch === key ? "true" : "false");
+      card.innerHTML = '<span class="bn">'+m.name+'</span><span class="bd">'+m.sub+'</span>';
+      card.addEventListener("click", function(){ selectBranch(key); });
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------------- base weekly grids ----------------
+
+  function renderBase(){
+    var mount = document.getElementById("baseMount");
+    mount.innerHTML = "";
+    for(var w=0; w<WEEKS_COUNT; w++){
+      var startDay = w*DAYS_PER_WEEK + 1;
+      var card = document.createElement("div");
+      card.className = "week-card";
+
+      var head = document.createElement("div");
+      head.className = "week-title";
+      head.innerHTML = '<h3>Week '+(w+1)+'</h3><span class="n">Days '+startDay+'–'+(startDay+DAYS_PER_WEEK-1)+'</span>';
+      card.appendChild(head);
+
+      var scroller = document.createElement("div");
+      scroller.className = "grid-scroll";
+
+      var table = document.createElement("table");
+      table.className = "base-tbl";
+
+      var thead = document.createElement("thead");
+      var thr = document.createElement("tr");
+      thr.innerHTML = '<th class="asset-h">Asset</th><th>Daily action</th>';
+      for(var d=1; d<=DAYS_PER_WEEK; d++){ thr.innerHTML += '<th class="day-h">D'+d+'</th>'; }
+      thead.appendChild(thr);
+      table.appendChild(thead);
+
+      var tbody = document.createElement("tbody");
+      BRANCHES.forEach(function(assetKey){
+        var tr = document.createElement("tr");
+        tr.innerHTML = '<td class="asset-cell">'+META[assetKey].name+'</td><td class="action-cell">'+BASE_ACTIONS[assetKey]+'</td>';
+        for(var d=1; d<=DAYS_PER_WEEK; d++){
+          var absDay = startDay + d - 1;
+          var key = assetKey + "-" + absDay;
+          var checked = !!state.base[key];
+          var td = document.createElement("td");
+          td.className = "day-cell";
+          var input = document.createElement("input");
+          input.type = "checkbox";
+          input.checked = checked;
+          input.setAttribute("aria-label", META[assetKey].name+", day "+absDay);
+          input.addEventListener("change", (function(k){
+            return function(e){
+              if(e.target.checked) state.base[k] = true; else delete state.base[k];
+              state.sample = false;
+              save();
+            };
+          })(key));
+          td.appendChild(input);
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+
+      scroller.appendChild(table);
+      card.appendChild(scroller);
+      mount.appendChild(card);
+    }
+  }
+
+  // ---------------- branch table ----------------
+
+  function renderBranchTable(){
+    var titleEl = document.getElementById("branchTitle");
+    var subEl = document.getElementById("branchSub");
+    var progressEl = document.getElementById("branchProgress");
+    var mount = document.getElementById("branchTblMount");
+
+    if(!state.branch){
+      titleEl.textContent = "Your four-week deep dive";
+      subEl.textContent = "Pick a Branch above to see its four weeks here.";
+      progressEl.innerHTML = "";
+      mount.innerHTML = '<div class="locked"><p>Nothing to show yet — pick the asset your Ownership Score flagged as your leak, above.</p></div>';
+      return;
+    }
+
+    var key = state.branch, m = META[key], weeks = WEEKS[key];
+    titleEl.textContent = m.name + " — your four weeks";
+    subEl.textContent = "Fix the leak first. Muscle, Structure, Fuel and Situations that aren't your Branch stay at Base level above, and get their turn later.";
+
+    var hold = state.weekHold[key] || {};
+    var doneCount = 0;
+    for(var i=1;i<=4;i++){ if(hold[i]) doneCount++; }
+    progressEl.innerHTML = '<span class="small">Weeks confirmed</span><span class="n num">'+doneCount+' / 4</span>';
+
+    var wrap = document.createElement("div");
+    wrap.className = "branch-tbl";
+    weeks.forEach(function(wk, idx){
+      var wn = idx+1;
+      var done = !!hold[wn];
+      var row = document.createElement("div");
+      row.className = "wk-row";
+      row.setAttribute("data-done", done ? "true" : "false");
+      row.innerHTML =
+        '<span class="wk-num">WK'+wn+'</span>'+
+        '<details class="wk-body"'+(done?' open':'')+'><summary>'+wk.t+'</summary><p class="detail">'+wk.d+'</p></details>'+
+        '<span class="wk-check"><input type="checkbox" data-wk="'+wn+'" '+(done?'checked':'')+' aria-label="Week '+wn+' confirmed"/></span>';
+      wrap.appendChild(row);
+    });
+    mount.innerHTML = "";
+    mount.appendChild(wrap);
+
+    mount.querySelectorAll("[data-wk]").forEach(function(el){
+      el.addEventListener("change", function(e){
+        var wn = e.target.getAttribute("data-wk");
+        if(!state.weekHold[key]) state.weekHold[key] = {};
+        if(e.target.checked) state.weekHold[key][wn] = true; else delete state.weekHold[key][wn];
+        state.sample = false;
+        save();
+        renderBranchTable();
+      });
+    });
+  }
+
+  // ---------------- print snapshot ----------------
+
+  function renderPrintArea(){
+    var el = document.getElementById("printArea");
+    if(!state.branch){ el.innerHTML = ""; return; }
+    var m = META[state.branch];
+    var html = '<div class="cover" style="padding:0 0 1.2rem;"><h1 style="font-size:1.7rem;">The 4-Week Ownership Tracker</h1>'+
+      '<p class="sub" style="color:#5B6353;">Your working copy of the Quick Reference page from The GLP-1 Ownership Protocol. Branch: '+m.name+'.</p></div>';
+    html += '<h2 style="font-size:1.05rem;margin:1rem 0 .6rem;">The Base — every day</h2><ul style="margin:0;padding-left:1.1rem;">';
+    BRANCHES.forEach(function(k){ html += '<li style="margin-bottom:.3rem;font-size:.9rem;"><strong>'+META[k].name+':</strong> '+BASE_ACTIONS[k]+'</li>'; });
+    html += '</ul>';
+    html += '<h2 style="font-size:1.05rem;margin:1.2rem 0 .6rem;">'+m.name+' — four weeks</h2><ol style="margin:0;padding-left:1.1rem;">';
+    WEEKS[state.branch].forEach(function(wk){ html += '<li style="margin-bottom:.5rem;font-size:.9rem;"><strong>'+wk.t+'.</strong> '+wk.d+'</li>'; });
+    html += '</ol>';
+    html += '<p style="margin-top:1.2rem;font-size:.85rem;"><strong>And if you slip:</strong> go back to the Base for one week, exactly as written. No heroic comeback. No punishment.</p>';
+    el.innerHTML = html;
+  }
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    state = blankState();
+    save();
+    renderAll();
+    document.getElementById("top").scrollIntoView({behavior:"smooth"});
+  });
+
+  function renderAll(){
+    renderBanner();
+    renderBranchPicker();
+    renderBase();
+    renderBranchTable();
+    renderPrintArea();
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

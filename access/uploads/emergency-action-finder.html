@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emergency Action Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F2E4; --card:#FFFFFF; --card-2:#EFE6CE;
+    --ink:#20301F; --ink-2:#5B6353; --ink-3:#8B9280;
+    --line:#E3D9BE; --line-2:#CFC29D;
+    --rust:#B5502E; --rust-soft:#F1DCCB; --rust-ink:#7C3016;
+    --owned:#2F6B45; --owned-soft:#DEEAE0;
+    --cover-1:#233423; --cover-2:#16211A; --cover-ink:#F3EEDD; --cover-ink-2:#C9C29B;
+    --shadow:0 1px 2px rgba(32,48,31,.05), 0 8px 24px -10px rgba(32,48,31,.18);
+    --f-display:"Fraunces", Georgia, "Times New Roman", serif;
+    --f-body:"Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --f-data:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --measure:32rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+      --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+      --line:#333A24; --line-2:#454C30;
+      --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+      --owned:#63AD82; --owned-soft:#1E3125;
+      --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171B12; --card:#1F2418; --card-2:#262B1B;
+    --ink:#EAE6D4; --ink-2:#AFB49B; --ink-3:#767C64;
+    --line:#333A24; --line-2:#454C30;
+    --rust:#DD8E64; --rust-soft:#3B2818; --rust-ink:#F0B48D;
+    --owned:#63AD82; --owned-soft:#1E3125;
+    --cover-1:#141C15; --cover-2:#0C120D; --cover-ink:#F3EEDD; --cover-ink-2:#B7AF87;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.01em;text-wrap:balance;line-height:1.16;margin:0;color:inherit;}
+  p{margin:0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  button{font-family:inherit;}
+  a{color:var(--rust-ink);}
+  :focus-visible{outline:2px solid var(--owned);outline-offset:2px;border-radius:3px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .wrap{max-width:32rem;margin:0 auto;padding:0 0 4.5rem;min-height:100%;}
+  .label{font-family:var(--f-data);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-3);}
+  .measure{max-width:var(--measure);}
+
+  .cover{background:linear-gradient(160deg,var(--cover-1),var(--cover-2));color:var(--cover-ink);padding:2.6rem 1.35rem 2.3rem;display:flex;flex-direction:column;gap:1.15rem;}
+  .cover-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .mark{width:2.1rem;height:2.1rem;border:1px solid rgba(243,238,221,.55);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:.95rem;flex:none;}
+  .cover-eyebrow{font-family:var(--f-data);font-size:.62rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--cover-ink-2);}
+  .cover h1{font-size:clamp(1.9rem,7vw,2.4rem);color:var(--cover-ink);}
+  .cover .sub{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.02rem;color:var(--cover-ink-2);max-width:30ch;line-height:1.45;}
+  .cover-rule{width:2.3rem;height:2px;background:var(--rust);}
+
+  section.block{padding:2.4rem 1.35rem;}
+  .qtext{font-size:1.55rem;text-align:center;margin-bottom:1.7rem;}
+
+  .asset-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+  .asset-btn{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.15rem 1rem;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;gap:.3rem;text-align:left;}
+  .asset-btn:hover{border-color:var(--owned);}
+  .asset-btn .an{font-family:var(--f-display);font-weight:600;font-size:1.1rem;}
+  .asset-btn .ad{font-size:.78rem;color:var(--ink-2);line-height:1.4;}
+
+  .answer{display:none;flex-direction:column;gap:1.2rem;align-items:center;text-align:center;}
+  .answer[data-show="true"]{display:flex;}
+  .asset-grid[data-hidden="true"]{display:none;}
+  .qtext[data-hidden="true"]{display:none;}
+
+  .answer-tag{font-family:var(--f-data);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rust-ink);background:var(--rust-soft);padding:.3rem .7rem;border-radius:20px;}
+  .answer-action{font-family:var(--f-display);font-size:1.7rem;font-weight:600;line-height:1.25;max-width:26rem;}
+  .answer-note{font-size:.94rem;color:var(--ink-2);line-height:1.55;max-width:26rem;}
+  .answer-quote{font-family:var(--f-display);font-style:italic;font-size:1.15rem;color:var(--owned);border-top:1px solid var(--line);padding-top:1.1rem;margin-top:.3rem;}
+  .again-btn{background:none;border:none;padding:0;font-family:var(--f-data);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);cursor:pointer;text-decoration:underline;text-underline-offset:3px;margin-top:.6rem;}
+
+  footer{padding:1.6rem 1.35rem 0;}
+  .disclosure{font-size:.78rem;line-height:1.5;color:var(--ink-3);}
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-eyebrow">A Guide For Women On GLP&#8209;1 Medication</span>
+      <span class="mark">O</span>
+    </div>
+    <h1>Emergency Action Finder</h1>
+    <p class="sub">For the day the full protocol feels like too much.</p>
+    <span class="cover-rule"></span>
+  </div>
+
+  <section class="block">
+    <h2 class="qtext" id="qtext">Which one needs you today?</h2>
+
+    <div class="asset-grid" id="assetGrid"></div>
+
+    <div class="answer" id="answer"></div>
+  </section>
+
+  <footer>
+    <p class="disclosure">This guide is a self-assessment and lifestyle framework, not a medical diagnosis or treatment plan. It includes no medication dosing guidance of any kind.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var ASSETS = [
+    {key:"muscle", name:"Muscle", sub:"the only one that's physically load-bearing", action:"Have one protein-forward food at your first meal. Eggs. Greek yogurt. Cottage cheese. A shake. Leftover chicken. It doesn't need to be glamorous — it needs real protein."},
+    {key:"structure", name:"Structure", sub:"runs without appetite suppression holding it up", action:"Eat at roughly the same few times today. Not perfectly, not on a military schedule — just consistently enough that eating stops being completely random."},
+    {key:"fuel", name:"Fuel", sub:"real nutrition, not just fewer calories", action:"Get one full-size portion of vegetables or fruit somewhere into today. That's the whole ask — not a calorie rule, just a reminder to not let a smaller appetite become whatever's easiest."},
+    {key:"situations", name:"Situations", sub:"what happens at 6pm, at a restaurant, on a bad week", action:"Once today, notice one moment when the old version of you might have reached for food. Then notice what happened. You're not fixing the pattern yet — you're learning to see it."}
+  ];
+
+  var grid = document.getElementById("assetGrid");
+  var answerEl = document.getElementById("answer");
+  var qtext = document.getElementById("qtext");
+
+  ASSETS.forEach(function(a){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "asset-btn";
+    btn.innerHTML = '<span class="an">'+a.name+'</span><span class="ad">'+a.sub+'</span>';
+    btn.addEventListener("click", function(){ showAnswer(a); });
+    grid.appendChild(btn);
+  });
+
+  function showAnswer(a){
+    grid.setAttribute("data-hidden","true");
+    qtext.setAttribute("data-hidden","true");
+    answerEl.setAttribute("data-show","true");
+    answerEl.innerHTML =
+      '<span class="answer-tag">Today, just '+a.name+'</span>'+
+      '<span class="answer-action">'+a.action+'</span>'+
+      '<span class="answer-note">That\'s it. Not the Branch, not the four weeks — just this one thing, today. The Base is designed to take almost nothing out of your day on purpose.</span>'+
+      '<span class="answer-quote">&ldquo;Hold. Don\'t quit.&rdquo;</span>'+
+      '<button class="again-btn" id="againBtn" type="button">Ask again</button>';
+    document.getElementById("againBtn").addEventListener("click", function(){
+      answerEl.setAttribute("data-show","false");
+      grid.removeAttribute("data-hidden");
+      qtext.removeAttribute("data-hidden");
+    });
+  }
+})();
+</script>
+</body>
+</html>

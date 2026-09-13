@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Your Access — The GLP-1 Ownership Protocol</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+body { margin: 0; background: #F7F2E4; -webkit-font-smoothing: antialiased; }
+a { color: #2F6B45; }
+a:hover { color: #20301F; }
+</style>
+</helmet>
+<div style="background:#F7F2E4; color:#20301F; font-family:'Work Sans',system-ui,sans-serif; padding:0 20px 0; min-height:100vh">
+
+<div style="max-width:1040px; margin:0 auto; padding:64px 0 0">
+
+<section style="display:flex; flex-direction:column; gap:22px; align-items:flex-start; padding-bottom:72px; border-bottom:1px solid rgba(32,48,31,0.12)">
+<div style="width:44px; height:44px; border-radius:999px; background:#DEEAE0; display:flex; align-items:center; justify-content:center; border:1px solid rgba(47,107,69,0.35)">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5L8 14.5L16 6" stroke="#2F6B45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">YOU'RE IN</div>
+<h1 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(34px,6vw,58px); line-height:1.06; letter-spacing:-0.015em; margin:0; max-width:20ch; text-wrap:pretty">Your GLP-1 Ownership Protocol Is Ready.</h1>
+<div style="max-width:62ch; display:flex; flex-direction:column; gap:14px; font-size:17px; line-height:1.65; color:rgba(32,48,31,0.82)">
+<p style="margin:0">You now have access to the complete 4-week Ownership Protocol and all five interactive tools.</p>
+<p style="margin:0">You do not need to use everything today.</p>
+<p style="margin:0">Start with the Protocol, keep your quiz result in mind, and use the tools below as you need them over the next four weeks.</p>
+</div>
+<div style="display:flex; flex-direction:column; gap:10px; margin-top:6px">
+<sc-if value="{{ protocolReady }}" hint-placeholder-val="{{ true }}">
+<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#2F6B45; color:#F7F2E4; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em" style-hover="background:#20301F">OPEN THE OWNERSHIP PROTOCOL →</a>
+</sc-if>
+<sc-if value="{{ protocolPending }}" hint-placeholder-val="{{ false }}">
+<div style="display:inline-flex; flex-direction:column; gap:8px">
+<span style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#DEEAE0; color:rgba(32,48,31,0.45); border:1px dashed rgba(32,48,31,0.35); font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em">OPEN THE OWNERSHIP PROTOCOL →</span>
+<span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#B5502E">LINK NOT YET CONFIGURED · accessLinks.protocolUrl</span>
+</div>
+</sc-if>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:rgba(32,48,31,0.5)">COMPLETE 4-WEEK GUIDE · PDF</div>
+</div>
+</section>
+
+<sc-if value="{{ hasQuizResult }}" hint-placeholder-val="{{ false }}">
+<section style="margin:56px 0 0; padding:34px; border-radius:20px; background:#F1DCCB; border:1px solid rgba(181,80,46,0.25)">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#B5502E; margin-bottom:14px">YOUR STARTING POINT</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(24px,3.4vw,34px); line-height:1.15; margin:0 0 14px">Your Quiz Pointed To {{ quizArea }}.</h2>
+<p style="margin:0 0 18px; max-width:62ch; font-size:16px; line-height:1.65; color:rgba(32,48,31,0.82)">Keep {{ quizArea }} in mind as you go through the Protocol. You do not need to ignore the other areas — this is simply the area your answers suggested may be most worth focusing on first.</p>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; color:#20301F">STARTING AREA: {{ quizArea }}</div>
+</section>
+</sc-if>
+
+<section style="padding:80px 0 0">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">START HERE</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(28px,4.2vw,42px); line-height:1.12; margin:14px 0 36px; max-width:22ch">Use Your Purchase In This Order.</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px">
+<div style="background:#fff; border:1px solid rgba(32,48,31,0.1); border-radius:18px; padding:26px; box-shadow:0 1px 2px rgba(32,48,31,0.04)">
+<div style="display:flex; align-items:baseline; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(32,48,31,0.45)"><span>STEP 01</span><span style="color:#B5502E">READ</span></div>
+<h3 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:22px; line-height:1.2; margin:16px 0 10px">Open The Protocol</h3>
+<p style="margin:0; font-size:15px; line-height:1.6; color:rgba(32,48,31,0.75)">Start with the core guide so you understand the Ownership framework and the four-week plan.</p>
+</div>
+<div style="background:#fff; border:1px solid rgba(32,48,31,0.1); border-radius:18px; padding:26px; box-shadow:0 1px 2px rgba(32,48,31,0.04)">
+<div style="display:flex; align-items:baseline; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(32,48,31,0.45)"><span>STEP 02</span><span style="color:#B5502E">FOCUS</span></div>
+<h3 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:22px; line-height:1.2; margin:16px 0 10px">Begin With Your Starting Area</h3>
+<p style="margin:0; font-size:15px; line-height:1.6; color:rgba(32,48,31,0.75)">If you came through the Ownership Quiz, use the area your answers pointed to first: Muscle, Structure, Fuel, or Situations.</p>
+</div>
+<div style="background:#fff; border:1px solid rgba(32,48,31,0.1); border-radius:18px; padding:26px; box-shadow:0 1px 2px rgba(32,48,31,0.04)">
+<div style="display:flex; align-items:baseline; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:rgba(32,48,31,0.45)"><span>STEP 03</span><span style="color:#B5502E">IMPLEMENT</span></div>
+<h3 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:22px; line-height:1.2; margin:16px 0 10px">Use The Tools When You Need Them</h3>
+<p style="margin:0; font-size:15px; line-height:1.6; color:rgba(32,48,31,0.75)">The tools below are there to help you put the Protocol into practice in real life. You do not need to complete all five at once.</p>
+</div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:22px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; color:rgba(32,48,31,0.5)">
+<span>READ</span><span style="color:#CFC29D">→</span><span>FOCUS</span><span style="color:#CFC29D">→</span><span>IMPLEMENT</span>
+</div>
+</section>
+
+<section style="padding:80px 0 0">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">YOUR CORE GUIDE</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(28px,4.2vw,42px); line-height:1.12; margin:14px 0 8px">The GLP-1 Ownership Protocol</h2>
+<div style="font-size:17px; color:rgba(32,48,31,0.6); margin-bottom:30px">Your Complete 4-Week Ownership Plan</div>
+<div style="background:#20301F; border-radius:24px; padding:clamp(26px,4vw,44px); display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:clamp(26px,4vw,44px); color:#F7F2E4">
+<div style="display:flex; flex-direction:column; gap:20px; min-width:0">
+<div style="display:flex; flex-direction:column; gap:14px; font-size:16px; line-height:1.68; color:rgba(247,242,228,0.82)">
+<p style="margin:0">The Protocol is the foundation of the system.</p>
+<p style="margin:0">It shows you how to use the period while your GLP-1 is helping to deliberately build more around the progress you're already making — without trying to overhaul everything at once.</p>
+</div>
+<div style="height:1px; background:rgba(247,242,228,0.18)"></div>
+<div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.16em; color:#CFC29D; margin-bottom:14px">YOU'LL FIND:</div>
+<ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; font-size:15px; line-height:1.5; color:rgba(247,242,228,0.9)">
+<li style="display:flex; gap:12px"><span style="color:#CFC29D">•</span><span>The Owned vs. Rented framework</span></li>
+<li style="display:flex; gap:12px"><span style="color:#CFC29D">•</span><span>The four Ownership areas: Muscle, Structure, Fuel, and Situations</span></li>
+<li style="display:flex; gap:12px"><span style="color:#CFC29D">•</span><span>Your Base + focused Branch</span></li>
+<li style="display:flex; gap:12px"><span style="color:#CFC29D">•</span><span>The 4-week implementation structure</span></li>
+<li style="display:flex; gap:12px"><span style="color:#CFC29D">•</span><span>Guidance for what to keep after the four weeks</span></li>
+</ul>
+</div>
+<div style="display:flex; flex-direction:column; gap:10px; margin-top:6px">
+<sc-if value="{{ protocolReady }}" hint-placeholder-val="{{ true }}">
+<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#F7F2E4; color:#20301F; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em" style-hover="background:#CFC29D">OPEN THE PROTOCOL →</a>
+</sc-if>
+<sc-if value="{{ protocolPending }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex; flex-direction:column; gap:8px">
+<span style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:rgba(247,242,228,0.1); color:rgba(247,242,228,0.5); border:1px dashed rgba(247,242,228,0.35); font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em">OPEN THE PROTOCOL →</span>
+<span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#F1DCCB">LINK NOT YET CONFIGURED · accessLinks.protocolUrl</span>
+</div>
+</sc-if>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; color:rgba(247,242,228,0.5)">PDF GUIDE</div>
+</div>
+</div>
+<div style="min-width:0; display:flex; align-items:stretch">
+<div style="flex:1; min-height:300px; display:flex; align-items:center; justify-content:center; padding:8px">
+<img src="uploads/GLP-ownership-protocol product image.png" alt="The GLP-1 Ownership Protocol" style="display:block; width:100%; max-width:400px; height:auto; filter:drop-shadow(0 22px 40px rgba(0,0,0,0.35))" />
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding:80px 0 0">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">YOUR INTERACTIVE TOOLKIT</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(28px,4.2vw,42px); line-height:1.12; margin:14px 0 18px; max-width:26ch">Five Tools To Help You Put It Into Practice.</h2>
+<div style="max-width:62ch; display:flex; flex-direction:column; gap:12px; font-size:16px; line-height:1.65; color:rgba(32,48,31,0.78); margin-bottom:34px">
+<p style="margin:0">Think of these as practical shortcuts.</p>
+<p style="margin:0">Use the one that helps with the situation you're in rather than trying to work through all five in order.</p>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:18px">
+<sc-for list="{{ tools }}" as="tool" hint-placeholder-count="5">
+<div style="background:#fff; border:1px solid rgba(32,48,31,0.1); border-radius:18px; padding:26px; display:flex; flex-direction:column; gap:14px; box-shadow:0 1px 2px rgba(32,48,31,0.04); transition:box-shadow .18s ease, transform .18s ease" style-hover="box-shadow:0 10px 26px rgba(32,48,31,0.1); transform:translateY(-2px)">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; color:#B5502E">{{ tool.label }}</div>
+<h3 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:21px; line-height:1.2; margin:0">{{ tool.name }}</h3>
+<p style="margin:0; font-size:15px; line-height:1.6; color:rgba(32,48,31,0.75); flex:1">{{ tool.description }}</p>
+<sc-if value="{{ tool.ready }}" hint-placeholder-val="{{ true }}">
+<a href="{{ tool.href }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:50px; padding:0 20px; border-radius:12px; background:#DEEAE0; color:#20301F; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-align:center" style-hover="background:#2F6B45; color:#F7F2E4">{{ tool.cta }}</a>
+</sc-if>
+<sc-if value="{{ tool.pending }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex; flex-direction:column; gap:8px">
+<span style="display:inline-flex; align-items:center; justify-content:center; min-height:50px; padding:0 20px; border-radius:12px; background:#F7F2E4; color:rgba(32,48,31,0.45); border:1px dashed rgba(32,48,31,0.3); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-align:center">{{ tool.cta }}</span>
+<span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:#B5502E">LINK NOT YET CONFIGURED · {{ tool.configPath }}</span>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="padding:80px 0 0">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">NEED SOMETHING SPECIFIC?</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(28px,4.2vw,42px); line-height:1.12; margin:14px 0 32px; max-width:24ch">Use The Tool That Matches The Moment.</h2>
+<div style="display:flex; flex-direction:column; border:1px solid rgba(32,48,31,0.12); border-radius:18px; overflow:hidden; background:#fff">
+<div style="display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:16px; padding:22px 24px; border-bottom:1px solid rgba(32,48,31,0.1)">
+<div style="font-size:16px; line-height:1.5">I want to stay consistent with the four-week plan.</div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.08em; color:#2F6B45; align-self:center">4-WEEK OWNERSHIP TRACKER</div>
+</div>
+<div style="display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:16px; padding:22px 24px; border-bottom:1px solid rgba(32,48,31,0.1)">
+<div style="font-size:16px; line-height:1.5">I just need one useful thing I can do today.</div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.08em; color:#2F6B45; align-self:center">EMERGENCY ACTION FINDER</div>
+</div>
+<div style="display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:16px; padding:22px 24px; border-bottom:1px solid rgba(32,48,31,0.1)">
+<div style="font-size:16px; line-height:1.5">I don't know what to eat.</div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.08em; color:#2F6B45; align-self:center">EASY MEALS GENERATOR</div>
+</div>
+<div style="display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:16px; padding:22px 24px">
+<div style="font-size:16px; line-height:1.5">A craving, stressful day, meal out, or disrupted routine is throwing me off.</div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.08em; color:#2F6B45; align-self:center">CRAVING RESPONSE CARD</div>
+</div>
+</div>
+<div style="margin-top:20px; font-size:16px; line-height:1.6; color:rgba(32,48,31,0.75)">
+Want more context around common GLP-1 assumptions?
+<sc-if value="{{ mythsReady }}" hint-placeholder-val="{{ true }}">
+<a href="{{ links.mythsUrl }}" style="color:#B5502E; text-decoration:underline; text-underline-offset:3px">→ Explore GLP-1 Myths, Debunked</a>
+</sc-if>
+<sc-if value="{{ mythsPending }}" hint-placeholder-val="{{ false }}">
+<span style="color:rgba(32,48,31,0.45)">→ Explore GLP-1 Myths, Debunked <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; color:#B5502E">(LINK PENDING)</span></span>
+</sc-if>
+</div>
+</section>
+
+<section style="margin:80px 0 0; background:#DEEAE0; border-radius:24px; padding:clamp(28px,4.5vw,52px)">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">ONE IMPORTANT REMINDER</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(26px,4vw,40px); line-height:1.12; margin:14px 0 22px; max-width:24ch">You Do Not Need To Do Everything This Week.</h2>
+<div style="max-width:60ch; display:flex; flex-direction:column; gap:12px; font-size:16px; line-height:1.68; color:rgba(32,48,31,0.82)">
+<p style="margin:0">The goal of the Ownership Protocol is not to turn your life into a project.</p>
+<p style="margin:0">Start with a few small basics.</p>
+<p style="margin:0">Give your starting area some extra attention.</p>
+<p style="margin:0">Use the next four weeks as practice.</p>
+<p style="margin:0">Come back to the tools whenever they are useful.</p>
+</div>
+</section>
+
+<section style="padding:72px 0 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:40px">
+<div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(24px,3.2vw,32px); line-height:1.14; margin:0 0 16px">Keep This Page Easy To Find.</h2>
+<div style="display:flex; flex-direction:column; gap:12px; font-size:16px; line-height:1.65; color:rgba(32,48,31,0.78)">
+<p style="margin:0">Bookmark this page so you can return to your Protocol and interactive tools throughout the next four weeks.</p>
+<p style="margin:0">You may also want to save the link somewhere you normally keep important resources.</p>
+</div>
+</div>
+<div>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#2F6B45">NEED HELP?</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(24px,3.2vw,32px); line-height:1.14; margin:14px 0 16px">Having Trouble Accessing Something?</h2>
+<p style="margin:0 0 18px; font-size:16px; line-height:1.65; color:rgba(32,48,31,0.78)">If you're having trouble opening the Protocol or one of the tools, contact us and we'll help.</p>
+<a href="mailto:support@glp1ownership.com" style="display:inline-flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:14px; letter-spacing:0.02em; color:#B5502E; text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px" style-hover="color:#20301F">support@glp1ownership.com</a>
+</div>
+</section>
+
+<sc-if value="{{ showGuarantee }}" hint-placeholder-val="{{ true }}">
+<section style="margin:72px 0 0; padding:34px; border-radius:20px; border:1px solid rgba(207,194,157,0.9); background:rgba(207,194,157,0.18)">
+<div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; color:#B5502E">30-DAY MONEY-BACK GUARANTEE</div>
+<h2 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(24px,3.2vw,32px); line-height:1.14; margin:14px 0 14px">Try The Ownership Protocol For 30 Days.</h2>
+<p style="margin:0 0 14px; max-width:62ch; font-size:16px; line-height:1.65; color:rgba(32,48,31,0.82)">Go through the Protocol and explore the tools. If you decide it isn't the right fit for you, contact us within 30 days of purchase and we'll refund your purchase.</p>
+<div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; color:rgba(32,48,31,0.6)">No complicated process. Just contact us within the 30-day window.</div>
+</section>
+</sc-if>
+
+<footer style="margin-top:80px; padding:34px 0 64px; border-top:1px solid rgba(32,48,31,0.12); display:flex; flex-direction:column; gap:22px">
+<p style="margin:0; max-width:80ch; font-size:13px; line-height:1.7; color:rgba(32,48,31,0.6)">The GLP-1 Ownership Protocol is for educational and informational purposes only. It is not medical advice and is not a substitute for individualized guidance from a qualified healthcare professional. Do not start, stop, or change medication or dosing based on this material.</p>
+<div style="display:flex; flex-wrap:wrap; gap:10px 26px; align-items:center">
+<sc-for list="{{ footerLinks }}" as="fl" hint-placeholder-count="4">
+<sc-if value="{{ fl.ready }}" hint-placeholder-val="{{ true }}">
+<a href="{{ fl.href }}" style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:#2F6B45; text-decoration:none" style-hover="text-decoration:underline">{{ fl.label }}</a>
+</sc-if>
+<sc-if value="{{ fl.pending }}" hint-placeholder-val="{{ false }}">
+<span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; color:rgba(32,48,31,0.35)">{{ fl.label }} (LINK PENDING)</span>
+</sc-if>
+</sc-for>
+</div>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGuarantee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;links&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Record&lt;string,string&gt;&quot;}}">
+const accessLinks = {
+  protocolUrl: 'uploads/The%20Ownership%20Protocol.pdf',
+  trackerUrl: 'uploads/4-week-ownership-tracker.html',
+  emergencyActionUrl: 'uploads/emergency-action-finder.html',
+  easyMealsUrl: 'uploads/easy-meals-generator.html',
+  cravingCardUrl: 'uploads/craving-response-card.html',
+  mythsUrl: 'uploads/glp1-myths-debunked.html',
+  supportUrl: 'mailto:support@glp1ownership.com',
+  privacyUrl: '',
+  termsUrl: '',
+  refundUrl: ''
+};
+
+const toolData = [
+  { name: '4-Week Ownership Tracker', label: '4-WEEK TOOL', description: "Keep your daily Base visible and track the area you're focusing on across the next four weeks.", cta: 'OPEN THE TRACKER →', urlKey: 'trackerUrl' },
+  { name: 'Emergency Action Finder', label: 'QUICK-ACTION TOOL', description: 'Not sure what to do today? Get one small action based on the area you want to support.', cta: 'FIND AN ACTION →', urlKey: 'emergencyActionUrl' },
+  { name: 'Easy Meals Generator', label: 'FUEL TOOL', description: 'Get simple meal ideas for days when appetite is quiet and deciding what to eat feels harder than it should.', cta: 'GENERATE AN EASY MEAL →', urlKey: 'easyMealsUrl' },
+  { name: 'Craving Response Card', label: 'SITUATIONS TOOL', description: 'Create a simple response you can come back to when a craving or difficult moment catches you off guard.', cta: 'CREATE MY RESPONSE CARD →', urlKey: 'cravingCardUrl' },
+  { name: 'GLP-1 Myths, Debunked', label: 'REFERENCE TOOL', description: 'Explore common GLP-1 assumptions and get clearer context around what the medication can and cannot do for you.', cta: 'EXPLORE THE MYTHS →', urlKey: 'mythsUrl' }
+];
+
+const AREAS = ['Muscle', 'Structure', 'Fuel', 'Situations'];
+
+class Component extends DCLogic {
+  state = { quizArea: null };
+
+  componentDidMount() {
+    let raw = null;
+    try {
+      const p = new URLSearchParams(window.location.search);
+      raw = p.get('area') || p.get('quizResult') || p.get('result');
+      if (!raw) raw = window.localStorage.getItem('ownershipQuizResult') || window.sessionStorage.getItem('ownershipQuizResult');
+    } catch (e) { raw = null; }
+    if (!raw) return;
+    const match = AREAS.find(a => a.toLowerCase() === String(raw).trim().toLowerCase());
+    if (match) this.setState({ quizArea: match });
+  }
+
+  renderVals() {
+    const links = Object.assign({}, accessLinks, this.props.links || {});
+    const ready = k => typeof links[k] === 'string' && links[k].trim() !== '';
+    const tools = toolData.map(t => ({
+      name: t.name, label: t.label, description: t.description, cta: t.cta,
+      href: links[t.urlKey], ready: ready(t.urlKey), pending: !ready(t.urlKey),
+      configPath: 'accessLinks.' + t.urlKey
+    }));
+    const footerLinks = [
+      { label: 'PRIVACY', key: 'privacyUrl' },
+      { label: 'TERMS', key: 'termsUrl' },
+      { label: 'REFUND POLICY', key: 'refundUrl' },
+      { label: 'SUPPORT', key: 'supportUrl' }
+    ].map(f => ({ label: f.label, href: links[f.key], ready: ready(f.key), pending: !ready(f.key) }));
+
+    return {
+      links, tools, footerLinks,
+      protocolReady: ready('protocolUrl'), protocolPending: !ready('protocolUrl'),
+      mythsReady: ready('mythsUrl'), mythsPending: !ready('mythsUrl'),
+      supportReady: ready('supportUrl'), supportPending: !ready('supportUrl'),
+      showGuarantee: this.props.showGuarantee !== false,
+      hasQuizResult: !!this.state.quizArea,
+      quizArea: this.state.quizArea || 'Structure'
+    };
+  }
+}
+</script>
+</body>
+</html>
