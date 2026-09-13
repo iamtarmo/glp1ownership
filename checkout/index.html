@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Work+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#F7F2E4; -webkit-font-smoothing:antialiased; }
+  a { color:#2F6B45; }
+  a:hover { color:#20301F; }
+  input::placeholder { color:#9aa79a; }
+</style>
+</helmet>
+<div data-checkout-root="1" style="min-height:100%;background:#F7F2E4;color:#20301F;font-family:'Work Sans',sans-serif;">
+
+  <header style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;border-bottom:1px solid rgba(32,48,31,0.12);">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:26px;height:26px;border-radius:50%;background:#2F6B45;"></div>
+      <span style="font-family:'Fraunces',serif;font-size:19px;font-weight:600;letter-spacing:-0.01em;">GLP-1 Ownership</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#2F6B45;">
+      <div style="width:9px;height:9px;border:1.5px solid #2F6B45;border-radius:2px;"></div>
+      SECURE CHECKOUT
+    </div>
+  </header>
+
+  <main style="max-width:1080px;margin:0 auto;padding:40px 24px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:44px;align-items:start;">
+
+    <div style="display:flex;flex-direction:column;gap:28px;min-width:0;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#B5502E;margin-bottom:12px;">YOU'RE ONE STEP AWAY</div>
+        <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:38px;line-height:1.12;letter-spacing:-0.02em;margin:0 0 14px;text-wrap:pretty;">Get Instant Access To The GLP-1 Ownership Protocol</h1>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(32,48,31,0.78);max-width:46ch;">Complete your order below and get immediate access to the 4-week protocol and all 5 interactive tools.</p>
+      </div>
+
+      <section style="background:#fff;border:1px solid rgba(32,48,31,0.14);border-radius:14px;padding:28px;box-shadow:0 2px 14px rgba(32,48,31,0.06);display:flex;flex-direction:column;gap:24px;">
+        <h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:23px;margin:0;letter-spacing:-0.01em;">Complete Your Order</h2>
+
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <label for="email" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#20301F;">EMAIL ADDRESS</label>
+          <input id="email" type="email" placeholder="you@email.com" style="font-family:'Work Sans',sans-serif;font-size:16px;color:#20301F;padding:14px 14px;border:1px solid rgba(32,48,31,0.22);border-radius:9px;background:#FCFAF4;outline:none;min-height:48px;box-sizing:border-box;" style-focus="border-color:#2F6B45;box-shadow:0 0 0 3px rgba(47,107,69,0.14);">
+          <span style="font-size:13px;color:rgba(32,48,31,0.6);">Your access details will be sent here.</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;">PAYMENT INFORMATION</div>
+          <div id="stripe-payment-element" style="border:1px dashed rgba(32,48,31,0.28);border-radius:9px;background:repeating-linear-gradient(135deg,#FCFAF4,#FCFAF4 9px,#F2EEE2 9px,#F2EEE2 18px);min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.7;letter-spacing:0.06em;color:rgba(32,48,31,0.6);">STRIPE PAYMENT ELEMENT MOUNTS HERE<br>card · apple pay · google pay · link</span>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button type="button" style="width:100%;min-height:56px;border:none;border-radius:10px;background:#2F6B45;color:#F7F2E4;font-family:'Work Sans',sans-serif;font-size:17px;font-weight:600;letter-spacing:0.01em;cursor:pointer;transition:background .15s ease;" style-hover="background:#20301F;">Continue to Secure Checkout →</button>
+          
+          <div style="text-align:center;font-size:13px;color:rgba(32,48,31,0.65);">One-time payment. No subscription.</div>
+          <div style="text-align:center;font-size:13px;color:rgba(32,48,31,0.65);">🔒 Secured by Stripe · 256-bit SSL encryption</div>
+        </div>
+
+        <div style="display:flex;gap:14px;align-items:flex-start;background:#DEEAE0;border-radius:11px;padding:18px;">
+          <div style="flex:none;width:34px;height:34px;border-radius:50%;border:2px solid #2F6B45;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:#2F6B45;">30</div>
+          <div style="min-width:0;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#2F6B45;margin-bottom:5px;">30-DAY MONEY-BACK GUARANTEE</div>
+            <div style="font-family:'Fraunces',serif;font-weight:600;font-size:17px;margin-bottom:6px;">Take 30 Days To Make It Yours</div>
+            <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(32,48,31,0.78);">Explore the GLP-1 Ownership Protocol and its tools. If you decide it isn't right for you, contact us within 30 days of purchase for a full refund.</p>
+          </div>
+        </div>
+      </section>
+
+      <div style="display:flex;flex-direction:column;gap:6px;padding-left:2px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#2F6B45;">SECURE CHECKOUT</div>
+        <div style="font-size:13.5px;color:rgba(32,48,31,0.65);">Your payment information is securely processed.</div>
+      </div>
+
+      <div style="border-top:1px solid rgba(32,48,31,0.14);padding-top:20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;margin-bottom:7px;">WHAT HAPPENS NEXT?</div>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:rgba(32,48,31,0.78);max-width:52ch;">Immediately after completing your order, you'll receive access to the GLP-1 Ownership Protocol and its interactive tools.</p>
+      </div>
+    </div>
+
+    <aside style="order:{{ asideOrder }};position:sticky;top:28px;min-width:0;background:#FCFAF4;border:1px solid rgba(32,48,31,0.14);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div style="flex:none;width:76px;height:100px;border-radius:5px;background:repeating-linear-gradient(135deg,#DEEAE0,#DEEAE0 7px,#CFC29D 7px,#CFC29D 14px);border:1px solid rgba(32,48,31,0.18);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.06em;color:rgba(32,48,31,0.7);">COVER</span>
+        </div>
+        <div style="min-width:0;">
+          <div style="font-family:'Fraunces',serif;font-weight:600;font-size:19px;line-height:1.25;">The GLP-1 Ownership Protocol</div>
+          <div style="font-size:13.5px;color:rgba(32,48,31,0.68);margin-top:5px;">4-Week Ownership System + Interactive Toolkit</div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(32,48,31,0.12);padding-top:18px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;margin-bottom:12px;">WHAT'S INCLUDED</div>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;">
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>The GLP-1 Ownership Protocol</li>
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>4-Week Ownership Tracker</li>
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>Emergency Action Finder</li>
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>Easy Meals Generator</li>
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>Craving Response Card</li>
+          <li style="display:flex;gap:10px;font-size:14.5px;line-height:1.4;"><span style="color:#2F6B45;">✓</span>GLP-1 Myths, Debunked</li>
+        </ul>
+      </div>
+
+      <div style="border-top:1px solid rgba(32,48,31,0.12);padding-top:18px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;font-size:14.5px;color:rgba(32,48,31,0.7);">
+          <span>Regular Price</span><span style="text-decoration:line-through;">$37</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:14.5px;">
+          <span>Today's Price</span><span style="color:#B5502E;font-weight:600;">$17</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(32,48,31,0.12);padding-top:14px;margin-top:4px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;">TOTAL TODAY</span>
+          <span style="font-family:'Fraunces',serif;font-weight:600;font-size:44px;line-height:1;letter-spacing:-0.02em;">$17</span>
+        </div>
+        <div style="font-size:13px;color:rgba(32,48,31,0.65);">One-time payment. No subscription.</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer style="border-top:1px solid rgba(32,48,31,0.14);background:#F2EDDE;">
+    <div style="max-width:1080px;margin:0 auto;padding:28px 24px 44px;display:flex;flex-direction:column;gap:22px;">
+      <div style="display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-size:13.5px;color:rgba(32,48,31,0.7);">
+        <span>© 2026 GLP-1 Ownership</span>
+        <a href="#" style="text-decoration:none;">Terms</a>
+        <a href="#" style="text-decoration:none;">Privacy</a>
+        <a href="#" style="text-decoration:none;">Refund Policy</a>
+        <a href="#" style="text-decoration:none;">Contact</a>
+      </div>
+      <div style="max-width:74ch;display:flex;flex-direction:column;gap:9px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:rgba(32,48,31,0.55);">IMPORTANT INFORMATION</div>
+        <p style="margin:0;font-size:11.5px;line-height:1.65;color:rgba(32,48,31,0.55);">The GLP-1 Ownership Protocol and its accompanying tools are provided for educational and informational purposes only. They are not medical advice and are not intended to diagnose, treat, cure, or prevent any disease or medical condition, or to replace individualized advice from a qualified healthcare professional.</p>
+        <p style="margin:0;font-size:11.5px;line-height:1.65;color:rgba(32,48,31,0.55);">Do not start, stop, or change a medication, dose, treatment plan, diet, or exercise program based on this material without consulting an appropriate healthcare professional.</p>
+        <p style="margin:0;font-size:11.5px;line-height:1.65;color:rgba(32,48,31,0.55);">Individual experiences and results vary. No specific health, weight-loss, weight-maintenance, or other outcome is promised or guaranteed.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { narrow: false };
+  componentDidMount() {
+    this.check = () => {
+      const n = (this.el?.getBoundingClientRect().width || window.innerWidth) < 720;
+      if (n !== this.state.narrow) this.setState({ narrow: n });
+    };
+    this.el = document.querySelector('[data-checkout-root]');
+    this.check();
+    window.addEventListener('resize', this.check);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.check); }
+  renderVals() { return { asideOrder: this.state.narrow ? -1 : 0 }; }
+}
+</script>
+</body>
+</html>
