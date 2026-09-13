@@ -4,6 +4,11 @@ const SENDER = { name: 'GLP-1 Ownership', email: 'support@glp1ownership.com' };
 const ACCESS_URL = 'https://www.glp1ownership.com/access';
 const SIGNATURE_TOLERANCE_SECONDS = 300;
 
+// This Stripe account also sells Metabolic Energy Switch at the same $17, and
+// checkout.session.completed fires account-wide. Match the payment link so
+// buyers of the other offer never receive this product's access email.
+const GLP1_PAYMENT_LINK = 'plink_1UFICBIocBKSmYPWqA4Hbwx7';
+
 function signatureIsValid(rawBody, header, secret) {
   if (!header || !secret) return false;
 
@@ -111,7 +116,13 @@ export async function POST(request) {
     return json({ ignored: event.type });
   }
 
-  const details = event.data.object.customer_details || {};
+  const session = event.data.object;
+
+  if (session.payment_link !== GLP1_PAYMENT_LINK) {
+    return json({ ignored: 'not a GLP-1 Ownership purchase' });
+  }
+
+  const details = session.customer_details || {};
   if (!details.email) {
     return json({ skipped: 'no customer email on session' });
   }
