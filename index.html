@@ -122,9 +122,9 @@
         <p style="margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(20px,2.2vw,25px);font-weight:600;line-height:1.22;color:#20301f;text-wrap:pretty">What you deliberately build alongside it</p>
         <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
           <sc-for list="{{ assets }}" as="asset" hint-placeholder-count="4">
-            <li style="display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid rgba(47,107,69,0.14)">
+            <li style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:11px 0;border-bottom:1px solid rgba(47,107,69,0.14)">
               <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#dbebe0;color:#1f6b41;display:flex;align-items:center;justify-content:center">{{ asset.icon }}</span>
-              <span style="flex:1;min-width:0;font-size:17px;color:#22352b">{{ asset.name }}</span>
+              <span style="flex:1 0 auto;font-size:17px;color:#22352b">{{ asset.name }}</span>
               <sc-if value="{{ asset.isPick }}" hint-placeholder-val="{{ false }}">
                 <span style="font-size:9px;letter-spacing:0.12em;font-weight:700;color:#1f6b41;background:#d7e9dd;border:1px solid #bcd8c6;border-radius:999px;padding:4px 9px;white-space:nowrap">YOUR QUIZ POINTED HERE</span>
               </sc-if>
