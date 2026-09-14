@@ -125,10 +125,10 @@
             <li style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:11px 0;border-bottom:1px solid rgba(47,107,69,0.14)">
               <span style="width:36px;height:36px;flex:none;border-radius:50%;background:#dbebe0;color:#1f6b41;display:flex;align-items:center;justify-content:center">{{ asset.icon }}</span>
               <span style="flex:1 0 auto;font-size:17px;color:#22352b">{{ asset.name }}</span>
-              <sc-if value="{{ asset.isPick }}" hint-placeholder-val="{{ false }}">
-                <span style="font-size:9px;letter-spacing:0.12em;font-weight:700;color:#1f6b41;background:#d7e9dd;border:1px solid #bcd8c6;border-radius:999px;padding:4px 9px;white-space:nowrap">YOUR QUIZ POINTED HERE</span>
-              </sc-if>
               <span style="font-size:10px;letter-spacing:0.14em;font-weight:700;color:#7d9a88;white-space:nowrap">{{ asset.tag }}</span>
+              <sc-if value="{{ asset.isPick }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size:9px;letter-spacing:0.12em;font-weight:700;color:#1f6b41;background:#d7e9dd;border:1px solid #bcd8c6;border-radius:999px;padding:4px 9px;white-space:nowrap;margin-left:auto">YOUR QUIZ POINTED HERE</span>
+              </sc-if>
             </li>
           </sc-for>
         </ul>
