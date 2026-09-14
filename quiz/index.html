@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/quiz/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=Work+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+  body{margin:0;background:#F7F2E4;color:#20301F;font-family:"Work Sans",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  *{box-sizing:border-box;}
+  a{color:#7C3016;text-decoration:none;}
+  a:hover{color:#B5502E;}
+  input{font-family:inherit;}
+  button{font-family:inherit;}
+  @keyframes owRise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  @keyframes owFade{from{opacity:0;}to{opacity:1;}}
+  /* Milestone art: cropped square-ish frame on phones, uncropped wide art on desktop. */
+  .ow-art-tall{display:block !important;}
+  .ow-art-wide{display:none !important;}
+  @media (min-width:760px){
+    .ow-art-tall{display:none !important;}
+    .ow-art-wide{display:block !important;}
+  }
+</style>
+<script src="/quiz/image-slot.js"></script>
+</helmet>
+<div style="min-height:100vh;background:#F7F2E4;padding:0 0 5rem;">
+
+  <div style="position:sticky;top:0;z-index:10;background:rgba(247,242,228,.93);backdrop-filter:blur(6px);borderBottom:1px solid #E3D9BE;">
+    <div style="max-width:35rem;margin:0 auto;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:#20301F;">GLP‑1 Ownership</span>
+      <sc-if value="{{ inQuiz }}" hint-placeholder-val="{{ true }}">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:#8B9280;">Question {{ qNum }} of 13</span>
+      </sc-if>
+    </div>
+    <sc-if value="{{ inQuiz }}" hint-placeholder-val="{{ true }}">
+      <div style="height:3px;background:#DEEAE0;">
+        <div style="height:3px;background:#2F6B45;transition:width .5s cubic-bezier(.4,0,.2,1);width:{{ pct }};"></div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="width:100%;max-width:60rem;margin:0 auto;padding:0 1.25rem;">
+
+    <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:2.6rem 0 0;animation:owRise .5s ease;">
+        <div style="display:flex;flex-wrap:wrap;gap:2.2rem;align-items:flex-start;">
+          <div style="flex:1 1 21rem;min-width:min(100%,19rem);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">The Ownership Quiz</span>
+            <h1 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2rem,6.4vw,3rem);line-height:1.08;letter-spacing:-.025em;margin:1rem 0 0;text-wrap:balance;">How much of your GLP‑1 progress are you <em style="font-style:italic;font-weight:600;color:#2F6B45;">actually building</em> around?</h1>
+            <p style="margin:1.2rem 0 0;font-size:1.06rem;line-height:1.62;color:#5B6353;max-width:32rem;">Answer 13 questions and see if you have a weak link that needs attention to keep your progress protected</p>
+          </div>
+          <div style="flex:1 1 16rem;min-width:min(100%,15rem);">
+            <img src="/quiz/img/hero.jpg" alt="" style="display:block;width:100%;height:clamp(11rem,38vw,20rem);object-fit:cover;object-position:50% 42%;border-radius:12px;background:#F3EFDD;">
+          </div>
+        </div>
+
+        <div style="margin:2.2rem 0 0;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:#8B9280;">THE QUIZ LOOKS AT 4 PARTS OF YOUR LIFESTYLE</span>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:.6rem;margin-top:.9rem;">
+            <sc-for list="{{ introMotif }}" as="m" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:.6rem;padding:1.05rem .95rem;border:1px solid {{ m.bc }};border-radius:11px;background:{{ m.bg }};">
+                <span style="color:{{ m.ic }};display:flex;">{{ m.icon }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#20301F;">{{ m.name }}</span>
+                <span style="font-family:Fraunces,Georgia,serif;font-size:.98rem;line-height:1.35;color:#5B6353;">{{ m.blurb }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="max-width:35rem;margin:2.2rem auto 0;">
+          <button type="button" onClick="{{ start }}" style="width:100%;background:#20301F;color:#F7F2E4;border:none;border-radius:8px;padding:1.15rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;" style-hover="background:#2F6B45;">Take the 90‑second quiz →</button>
+          <p style="margin:.95rem 0 0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.67rem;letter-spacing:.07em;color:#8B9280;">13 quick questions · Personalized directional result</p>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="max-width:35rem;margin:0 auto;padding:0 1.25rem;">
+
+    <sc-if value="{{ isQuestion }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:2.4rem 0 0;">
+        <div key="{{ qKey }}" style="animation:owRise .32s ease;">
+          <span style="display:inline-flex;align-items:center;gap:.6rem;font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:#B5502E;"><span style="width:1.1rem;height:1px;background:#B5502E;"></span>{{ phase }}</span>
+          <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.5rem,5.6vw,1.95rem);line-height:1.2;letter-spacing:-.02em;margin:.7rem 0 0;text-wrap:pretty;">{{ stem }}</h2>
+          <sc-if value="{{ note }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:.7rem 0 0;font-size:.92rem;line-height:1.55;color:#8B9280;">{{ note }}</p>
+          </sc-if>
+
+          <sc-if value="{{ isTiles }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.5rem;">
+              <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="5">
+                <button type="button" onClick="{{ t.pick }}" style="grid-column:{{ t.span }};display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;text-align:left;padding:1rem .95rem;border-radius:11px;cursor:pointer;background:{{ t.bg }};border:1.5px solid {{ t.bc }};color:#20301F;min-height:5.5rem;transition:border-color .18s ease, background .18s ease;">
+                  <span style="color:{{ t.ic }};display:flex;">{{ t.icon }}</span>
+                  <span style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1rem;">{{ t.t }}</span>
+                  <span style="font-size:.8rem;line-height:1.4;color:#5B6353;">{{ t.d }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <button type="button" onClick="{{ next }}" disabled="{{ tileLocked }}" style="margin-top:1.3rem;width:100%;background:{{ tileBtnBg }};color:#FFFFFF;border:none;border-radius:8px;padding:1.05rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">Continue →</button>
+          </sc-if>
+
+          <sc-if value="{{ isChoice }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem;">
+              <sc-for list="{{ opts }}" as="o" hint-placeholder-count="4">
+                <button type="button" onClick="{{ o.pick }}" style="display:flex;align-items:flex-start;gap:.85rem;text-align:left;width:100%;min-height:3.6rem;padding:1.05rem 1.1rem;border-radius:10px;cursor:pointer;background:{{ o.bg }};border:1.5px solid {{ o.bc }};color:#20301F;font-size:1rem;line-height:1.45;box-shadow:{{ o.sh }};transition:border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;" style-hover="border-color:#2F6B45;transform:translateY(-1px);">
+                  <span style="flex:none;margin-top:.28rem;width:.95rem;height:.95rem;border-radius:50%;border:1.5px solid {{ o.dc }};background:{{ o.dbg }};box-shadow:{{ o.dsh }};transition:background .18s ease, border-color .18s ease;"></span>
+                  <span style="flex:none;font-size:1.15rem;line-height:1.25;">{{ o.em }}</span>
+                  <span>{{ o.t }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ back }}" style="margin-top:1.4rem;background:none;border:none;padding:.5rem 0;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8B9280;cursor:pointer;">← Back</button>
+          </sc-if>
+          <sc-if value="{{ isQ4 }}" hint-placeholder-val="{{ false }}">
+            <img class="ow-art-tall" src="/quiz/img/structure.jpg" alt="" style="display:block;width:100%;height:clamp(8rem,26vw,11rem);object-fit:cover;object-position:50% 38%;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+            <img class="ow-art-wide" src="/quiz/img/desktop-structure.jpg" alt="" style="width:100%;height:auto;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+          </sc-if>
+          <sc-if value="{{ isQ7 }}" hint-placeholder-val="{{ false }}">
+            <img class="ow-art-tall" src="/quiz/img/muscle.jpg" alt="" style="display:block;width:100%;height:clamp(8rem,26vw,11rem);object-fit:cover;object-position:50% 38%;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+            <img class="ow-art-wide" src="/quiz/img/desktop-muscle.jpg" alt="" style="width:100%;height:auto;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+          </sc-if>
+          <sc-if value="{{ isQ13 }}" hint-placeholder-val="{{ false }}">
+            <img class="ow-art-tall" src="/quiz/img/fuel.jpg" alt="" style="display:block;width:100%;height:clamp(8rem,26vw,11rem);object-fit:cover;object-position:50% 38%;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+            <img class="ow-art-wide" src="/quiz/img/desktop-fuel.jpg" alt="" style="width:100%;height:auto;border-radius:12px;background:#F3EFDD;margin-top:1.6rem;">
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isInter }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:2.6rem;background:#20301F;color:#F3EEDD;border-radius:14px;padding:1.6rem 1.6rem 2.2rem;animation:owRise .4s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#CFC29D;">Your pattern</span>
+        <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.75rem;line-height:1.2;margin:.9rem 0 0;color:#F3EEDD;">A pattern is starting to take shape.</h2>
+        <p style="margin:1.1rem 0 0;font-size:1rem;line-height:1.62;color:#C9C29B;">Your answers are helping separate the support your medication may be providing from the things you're deliberately building alongside it.</p>
+        <p style="margin:.85rem 0 0;font-size:1rem;line-height:1.62;color:#C9C29B;">A few more questions will help us see whether the same pattern shows up elsewhere.</p>
+        <button type="button" onClick="{{ interNext }}" style="margin-top:1.8rem;width:100%;background:#F7F2E4;color:#20301F;border:none;border-radius:8px;padding:1.05rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">Continue →</button>
+        <img class="ow-art-tall" src="/quiz/img/situations.jpg" alt="" style="display:block;width:100%;height:clamp(8rem,26vw,11rem);object-fit:cover;object-position:50% 38%;border-radius:10px;margin-top:1.6rem;">
+        <img class="ow-art-wide" src="/quiz/img/desktop-situations.jpg" alt="" style="width:100%;height:auto;border-radius:10px;margin-top:1.6rem;">
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAnalyzing }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:4rem 0 0;animation:owFade .4s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">Reading your answers</span>
+        <div style="margin-top:1.6rem;display:flex;flex-direction:column;gap:.1rem;">
+          <sc-for list="{{ analyzeLines }}" as="l" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:.85rem;padding:.85rem 0;border-bottom:1px solid #E3D9BE;opacity:{{ l.op }};transition:opacity .4s ease;">
+              <span style="flex:none;width:1.55rem;height:1.55rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid {{ l.bc }};background:{{ l.bg }};color:{{ l.fg }};font-size:.75rem;">{{ l.mark }}</span>
+              <span style="font-family:Fraunces,Georgia,serif;font-size:1.02rem;color:#20301F;">{{ l.text }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isGate }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:3rem;background:#FFFDF7;border:1px solid #E3D9BE;border-radius:14px;padding:2rem 1.5rem;animation:owRise .4s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#2F6B45;">Your result is ready</span>
+        <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.8rem;line-height:1.2;margin:.85rem 0 0;">Your Ownership profile is ready</h2>
+        <p style="margin:.9rem 0 0;font-size:1rem;line-height:1.6;color:#5B6353;">Enter your details to see your result &mdash; we'll email you a copy too.</p>
+        <input type="text" autocomplete="given-name" placeholder="Your first name" value="{{ firstName }}" onChange="{{ onName }}" onKeyDown="{{ onEmailKey }}" style="margin-top:1.3rem;width:100%;padding:1rem 1.05rem;border:1.5px solid #CFC29D;border-radius:8px;background:#F7F2E4;font-size:1rem;color:#20301F;">
+        <input type="email" autocomplete="email" placeholder="Your email address" value="{{ email }}" onChange="{{ onEmail }}" onKeyDown="{{ onEmailKey }}" style="margin-top:.6rem;width:100%;padding:1rem 1.05rem;border:1.5px solid #CFC29D;border-radius:8px;background:#F7F2E4;font-size:1rem;color:#20301F;">
+        <sc-if value="{{ emailErr }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:.6rem 0 0;font-size:.86rem;color:#B5502E;">{{ emailErr }}</p>
+        </sc-if>
+        <button type="button" onClick="{{ unlock }}" style="margin-top:1rem;width:100%;background:#2F6B45;color:#FFFFFF;border:none;border-radius:8px;padding:1.1rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">See my result &rarr;</button>
+        <p style="margin:.9rem 0 0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.08em;color:#8B9280;">{{ gateMicro }}</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isR1 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:2.4rem 0 3rem;animation:owRise .45s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">Your directional result</span>
+        <sc-if value="{{ primaryImg }}" hint-placeholder-val="{{ false }}">
+          <img class="ow-art-wide" src="{{ primaryImgWide }}" alt="" style="width:100%;height:auto;border-radius:12px;background:#F3EFDD;margin-top:1rem;">
+          <img class="ow-art-tall" src="{{ primaryImg }}" alt="" style="display:block;width:100%;height:clamp(10rem,32vw,14rem);object-fit:cover;object-position:50% 38%;border-radius:12px;background:#F3EFDD;margin-top:1rem;">
+        </sc-if>
+        <p style="margin:1.3rem 0 0;font-family:Fraunces,Georgia,serif;font-weight:400;font-style:italic;font-size:1.35rem;line-height:1.2;color:#5B6353;">Your answers point to</p>
+        <div style="display:flex;align-items:center;gap:.85rem;margin-top:.4rem;">
+          <span style="flex:none;display:flex;align-items:center;justify-content:center;width:3rem;height:3rem;border-radius:50%;background:#DEEAE0;color:#2F6B45;">{{ primaryIcon }}</span>
+          <span style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.4rem,10vw,3.4rem);line-height:1;letter-spacing:-.03em;text-transform:uppercase;color:#20301F;">{{ primaryName }}</span>
+        </div>
+        <sc-if value="{{ hasSecondary }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:.75rem 0 0;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#7C3016;">{{ secondaryName }} was close behind</p>
+        </sc-if>
+        <sc-if value="{{ strongFoundations }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:1.3rem 0 0;font-size:1.08rem;line-height:1.55;color:#20301F;">Your answers suggest you've already built some solid foundations.</p>
+        </sc-if>
+        <p style="margin:1.3rem 0 0;font-size:1.08rem;line-height:1.55;color:#20301F;">{{ c1Opening }}</p>
+        <div style="display:flex;flex-direction:column;gap:.8rem;margin-top:1rem;">
+          <sc-for list="{{ c1Paras }}" as="p" hint-placeholder-count="2">
+            <p style="margin:0;font-size:1.02rem;line-height:1.6;color:#5B6353;">{{ p.t }}</p>
+          </sc-for>
+        </div>
+        <sc-if value="{{ hasEcho }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:1.6rem;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#8B9280;">That fits with what you told us:</span>
+            <div style="display:flex;flex-direction:column;gap:.55rem;margin-top:.6rem;">
+              <sc-for list="{{ echo }}" as="e" hint-placeholder-count="2">
+                <p style="margin:0;padding-left:.85rem;border-left:2px solid #CFC29D;font-size:.94rem;line-height:1.45;color:#5B6353;">{{ e.text }}</p>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <button type="button" onClick="{{ rNext }}" style="margin-top:1.8rem;width:100%;background:#20301F;color:#F7F2E4;border:none;border-radius:8px;padding:1.1rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">Show me what to do first &rarr;</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isR2 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:2.4rem 0 3rem;animation:owRise .45s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">Your first move</span>
+        <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,6vw,2.1rem);line-height:1.18;letter-spacing:-.02em;margin:.85rem 0 0;text-wrap:pretty;">{{ c2Headline }}</h2>
+        <div style="margin-top:1.5rem;border:1.5px solid #2F6B45;border-radius:12px;background:#DEEAE0;padding:1.4rem 1.25rem;">
+          <div style="display:flex;flex-direction:column;gap:.85rem;">
+            <sc-for list="{{ c2Paras }}" as="p" hint-placeholder-count="5">
+              <p style="margin:0;font-size:1.02rem;line-height:1.55;color:{{ p.fg }};font-weight:{{ p.fw }};">{{ p.t }}</p>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" onClick="{{ rNext }}" style="margin-top:1.8rem;width:100%;background:#20301F;color:#F7F2E4;border:none;border-radius:8px;padding:1.1rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">Why does this matter? &rarr;</button>
+        <button type="button" onClick="{{ rBack }}" style="margin-top:1rem;width:100%;background:none;border:none;padding:.5rem 0;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8B9280;cursor:pointer;">&larr; Back</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isR3 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:2.4rem 0 3rem;animation:owRise .45s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">Why this helps</span>
+        <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.75rem,6.6vw,2.35rem);line-height:1.14;letter-spacing:-.025em;margin:.85rem 0 0;text-wrap:pretty;">{{ c3Headline }}</h2>
+        <div style="display:flex;flex-direction:column;gap:.85rem;margin-top:1.4rem;">
+          <sc-for list="{{ c3Paras }}" as="p" hint-placeholder-count="4">
+            <p style="margin:0;font-size:1.02rem;line-height:1.62;color:#5B6353;">{{ p.t }}</p>
+          </sc-for>
+        </div>
+        <p style="margin:1.5rem 0 0;padding-left:1rem;border-left:2px solid #2F6B45;font-family:Fraunces,Georgia,serif;font-size:1.12rem;line-height:1.45;color:#20301F;">{{ c3Key }}</p>
+        <button type="button" onClick="{{ rNext }}" style="margin-top:1.8rem;width:100%;background:#20301F;color:#F7F2E4;border:none;border-radius:8px;padding:1.1rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">How do I build on this? &rarr;</button>
+        <button type="button" onClick="{{ rBack }}" style="margin-top:1rem;width:100%;background:none;border:none;padding:.5rem 0;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8B9280;cursor:pointer;">&larr; Back</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isR4 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:2.4rem 0 3rem;animation:owRise .45s ease;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:#B5502E;">Your next step</span>
+        <h2 style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,6vw,2.1rem);line-height:1.18;letter-spacing:-.02em;margin:.85rem 0 0;text-wrap:pretty;">{{ c4HeadA }}<br><span style="color:#2F6B45;">{{ c4HeadB }}</span></h2>
+        <div style="display:flex;flex-direction:column;gap:.85rem;margin-top:1.2rem;">
+          <sc-for list="{{ c4Paras }}" as="p" hint-placeholder-count="3">
+            <p style="margin:0;font-size:1.02rem;line-height:1.6;color:#5B6353;">{{ p.t }}</p>
+          </sc-for>
+        </div>
+        <div style="margin-top:1.8rem;display:flex;flex-direction:column;align-items:stretch;">
+          <div style="display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-radius:11px;background:#DEEAE0;border:1.5px solid #2F6B45;">
+            <span style="flex:none;color:#2F6B45;display:flex;">{{ primaryIcon }}</span>
+            <span style="display:flex;flex-direction:column;gap:.15rem;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#2F6B45;">Your quiz pointed to</span>
+              <span style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.2rem;line-height:1.1;text-transform:uppercase;color:#20301F;">{{ primaryName }}</span>
+            </span>
+          </div>
+          <span style="align-self:center;width:1px;height:1.4rem;background:#CFC29D;"></span>
+          <div style="display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-radius:11px;background:#F1DCCB;border:1.5px solid #E4C6AE;">
+            <span style="flex:none;display:flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;background:#B5502E;color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:.72rem;">4</span>
+            <span style="display:flex;flex-direction:column;gap:.15rem;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#7C3016;">Your next step</span>
+              <span style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.2rem;line-height:1.1;color:#20301F;">{{ c4NextStep }}</span>
+            </span>
+          </div>
+        </div>
+        <a href="{{ salesUrl }}" target="_blank" rel="noopener" style="margin-top:1.8rem;display:block;text-align:center;background:#2F6B45;color:#FFFFFF;border-radius:8px;padding:1.15rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;">See my 4&#8209;week Ownership plan &rarr;</a>
+        <p style="margin:.9rem 0 0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.67rem;letter-spacing:.07em;color:#8B9280;">Complete protocol + 5 interactive tools</p>
+        <button type="button" onClick="{{ rBack }}" style="margin-top:1rem;width:100%;background:none;border:none;padding:.5rem 0;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8B9280;cursor:pointer;">&larr; Back</button>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;salesPageUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://www.glp1ownership.com/&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;leadCaptureLive&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;unsubscribeLine&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { screen:"intro", idx:0, answers:{}, interShown:false, resultIdx:0, analyzeStep:0, firstName:"", email:"", emailErr:"", read:null };
+
+  // ---------- data ----------
+  get ASSETS(){ return ["muscle","structure","fuel","situations"]; }
+  get NAME(){ return {muscle:"Muscle", structure:"Structure", fuel:"Fuel", situations:"Situations"}; }
+  get MEANING(){ return {
+    muscle:{headline:"Muscle is the physically load-bearing part of the result",
+      body:"Of the four assets, this is the only one that's literally structural. When weight is changing, muscle is the thing most worth deliberately supporting — not to get bigger, but so that what's underneath your progress stays useful to you.",
+      builds:["Two short resistance sessions a week","Protein at your first meal","A simple strength check you can repeat"]},
+    structure:{headline:"Structure gives you something to fall back on",
+      body:"Structure means a repeatable eating rhythm that isn't organized entirely around whether appetite happens to be strong or quiet that day. It's the difference between a pattern you run and a pattern that runs because you're not hungry.",
+      builds:["Three rough eating anchors","One repeatable meal you don't rethink","Eating on schedule on quiet-appetite days"]},
+    fuel:{headline:"Fuel is about making the food you do eat count",
+      body:"When appetite and food volume are smaller, a few reliable ways to build a useful meal can matter more than focusing on eating less. Fuel is about what's in the food, not how little of it there is.",
+      builds:["A short go-to list of meals that work","A protein-forward first meal","A rough sense of your daily protein"]},
+    situations:{headline:"Situations is where the plan meets real life",
+      body:"Stress, travel, restaurants, cravings, celebrations, and the weeks where everything happens at once. Situations is about having a response ready for those before you're standing in one.",
+      builds:["Naming your two or three real triggers","Deciding one concrete response in advance","Rehearsing it while the stakes are low"]}
+  }; }
+  get WHY(){ return {
+    muscle:"Muscle is about deliberately supporting your strength while your weight is changing.",
+    structure:"Structure is about having a way of eating that doesn't depend entirely on how hungry you happen to feel.",
+    fuel:"Fuel is about knowing how to make the food you do eat count when your appetite is smaller.",
+    situations:"Situations is about knowing what you'll do when stress, travel, restaurants, cravings or an off week disrupt the usual routine."
+  }; }
+  get OUTCOMES(){ return {
+    muscle:["Strength work has a clear place in your week","You have a simple way to support it consistently","You feel like you're actively supporting strength while your weight changes"],
+    structure:["You know roughly when you're going to eat","You have a few meals or eating anchors you can rely on","Quiet-appetite days don't leave your whole day unstructured"],
+    fuel:["You know what to eat even when you're not very hungry","You have a few easy meals you can fall back on","You know how to make smaller meals count"],
+    situations:["You know which situations tend to throw you off","You have a response ready before you need it","One difficult day doesn't automatically turn into a difficult week"]
+  }; }
+  get MILESTONE(){ return {q4:"/quiz/img/structure.jpg", q7:"/quiz/img/muscle.jpg", q13:"/quiz/img/fuel.jpg"}; }
+  // Wide 3.2:1 companions shown only on desktop, so no crop is needed there.
+  get MILESTONE_WIDE(){ return {q4:"/quiz/img/desktop-structure.jpg", q7:"/quiz/img/desktop-muscle.jpg", q13:"/quiz/img/desktop-fuel.jpg"}; }
+  get RESULT(){ return {
+    muscle:{
+      opening:"Based on your answers, supporting your strength may be the best place for you to focus first.",
+      paras:["This doesn't mean you need to become a gym person or completely change how you exercise.","It means strength may not yet have a consistent enough place in the progress you're making."],
+      c2Headline:"Give strength somewhere to live in your week.",
+      c2:[{t:"Look at the next seven days."},{t:"Choose two realistic 15\u201320 minute windows where some form of resistance or strength work could fit."},{t:"Don't build the perfect workout yet. Just choose the time."},{t:"The first step isn't doing more. It's making sure strength has an actual place to happen.", em:true}],
+      c3Headline:"What gets a place in your week has a better chance of becoming yours.",
+      c3:["It's easy for strength work to stay in the category of: \u201cI know I should probably do that.\u201d","Putting it on the calendar changes the question from \u201cWill I get around to it?\u201d to \u201cWhat will I do in the time I've already made for it?\u201d"],
+      c3Key:"That's the beginning of taking ownership of Muscle: deliberately supporting strength instead of leaving it to chance.",
+      c4HeadA:"You know where to start.", c4HeadB:"Now build it for 4 weeks.",
+      c4:["One scheduled action is useful.","But the bigger goal is creating a simple way to support Muscle that can actually fit into normal life.","The GLP\u20111 Ownership Protocol gives you a 4\u2011week structure for doing exactly that \u2014 while keeping the rest of your plan deliberately small."],
+      nextStep:"Make it repeatable"},
+    structure:{
+      opening:"Based on your answers, creating a more reliable eating rhythm may be the best place for you to focus first.",
+      paras:["When hunger is quieter, it's easy for eating to become something that happens only when appetite finally speaks up \u2014 or when the day gives you a chance.","Structure means having a little more intention underneath that."],
+      c2Headline:"Tomorrow, don't change your eating. Just notice the pattern.",
+      c2:[{t:"For one day, write down roughly when you eat. That's it."},{t:"At the end of the day, look at the longest gap and ask yourself: \u201cWas I simply not hungry \u2014 or did the day get away from me?\u201d"},{t:"Don't fix anything yet. First, see what's actually happening.", em:true}],
+      c3Headline:"You can't build a reliable rhythm until you can see the one you have.",
+      c3:["Quiet appetite can make an unstructured day feel perfectly fine in the moment.","But observing your eating rhythm shows you something more useful: how much of the pattern is intentional \u2014 and how much is simply happening because hunger isn't asking for much."],
+      c3Key:"That's the beginning of taking ownership of Structure: building an eating rhythm you can recognize and repeat.",
+      c4HeadA:"You found the pattern.", c4HeadB:"Now turn it into something repeatable.",
+      c4:["One day of observation gives you a clue.","The next step is building a simple eating structure that works on quiet-appetite days, busy days and normal days \u2014 without turning food into another full-time job.","The GLP\u20111 Ownership Protocol gives you four weeks to build that deliberately."],
+      nextStep:"Build a rhythm you can rely on"},
+    fuel:{
+      opening:"Based on your answers, making the food you do eat count may be the best place for you to focus first.",
+      paras:["Eating less can feel relatively easy when appetite is quieter.","But eating less and knowing what to eat aren't quite the same skill.","Fuel is about becoming more deliberate with the food that does make it onto your plate."],
+      c2Headline:"Choose tomorrow's easiest meal today.",
+      c2:[{t:"Pick one meal you'll have tomorrow before you wait to see how hungry you feel."},{t:"Don't make it fancy. Choose something you already know is easy, realistic and works for you."},{t:"The goal isn't to design a perfect day of eating. It's to make one useful food decision before appetite has to make it for you.", em:true}],
+      c3Headline:"Quiet appetite makes eating less easier. It doesn't make every food decision for you.",
+      c3:["When you decide one useful meal ahead of time, you're practicing a different skill: knowing how you want to feed yourself even when hunger isn't giving you much direction.","Do that often enough and food becomes less about \u201cWhat can I manage right now?\u201d and more about \u201cI already know what works for me.\u201d"],
+      c3Key:"That's the beginning of taking ownership of Fuel.",
+      c4HeadA:"One reliable meal is a start.", c4HeadB:"Now build a system around it.",
+      c4:["The goal isn't a perfect meal plan.","It's having enough simple options and basic rules that you don't have to reinvent eating every day.","The GLP\u20111 Ownership Protocol shows you how to spend four weeks building more consistency around Fuel \u2014 while keeping the process practical."],
+      nextStep:"Make useful eating easier to repeat"},
+    situations:{
+      opening:"Based on your answers, handling the moments when normal routines break down may be the best place for you to focus first.",
+      paras:["Things may feel manageable most of the time.","The harder test tends to be what happens when stress, travel, restaurants, cravings, celebrations or a chaotic week enters the picture.","Situations is about becoming less dependent on everything going according to plan."],
+      c2Headline:"Pick one situation that usually throws you off.",
+      c2:[{t:"Think about the last time your normal routine went sideways. Maybe it was stress. A restaurant. Travel. A hectic workday."},{t:"Now identify the first moment where things started slipping."},{t:"Then decide one small response you could try the next time that moment appears. Just one.", em:true}],
+      c3Headline:"It's much easier to make a decision before you're standing in the situation.",
+      c3:["When everything is going smoothly, you don't need much of a backup plan.","It's the unpredictable moments that reveal whether you have something to fall back on.","Deciding your response ahead of time means you aren't inventing the plan while you're stressed, tired, travelling or already off routine."],
+      c3Key:"That's the beginning of taking ownership of Situations: having a response ready when real life shows up.",
+      c4HeadA:"One response helps.", c4HeadB:"A system gives you something to fall back on.",
+      c4:["You don't need a rule for every situation life could throw at you.","You need a few responses you've thought through and practiced enough that they're there when you need them.","The GLP\u20111 Ownership Protocol gives you four weeks to build that kind of practical system around your result."],
+      nextStep:"Build responses you can actually use"}
+  }; }
+  get PLAIN(){ return {
+    muscle:"Muscle simply means deliberately supporting your strength while your weight is changing.",
+    structure:"Structure simply means having a way of eating that doesn't depend entirely on how hungry you happen to feel.",
+    fuel:"Fuel simply means knowing how to make the food you do eat count — especially on days when your appetite is smaller.",
+    situations:"Situations simply means knowing what you'll do when stress, travel, restaurants, cravings or an off week disrupt the usual routine."
+  }; }
+  get PHASES(){ return {p1:"Where you're at", p2:"How things work for you right now", p3:"Where you may be relying on support", p4:"What you'd like to build"}; }
+  get QUESTIONS(){ return [
+    {id:"q1", phase:"p1", stem:"What would make this next chapter of your progress feel even better?", opts:[
+      {em:"\uD83D\uDCAA", t:"Feeling stronger and more capable in my body", s:{muscle:1}},
+      {em:"\uD83D\uDDD3\uFE0F", t:"Having an eating rhythm that feels easy to keep", s:{structure:1}},
+      {em:"\uD83C\uDF7D\uFE0F", t:"Knowing my smaller meals are working well for me", s:{fuel:1}},
+      {em:"\uD83C\uDF26\uFE0F", t:"Feeling steady even when normal life gets messy", s:{situations:1}}]},
+    {id:"q2", phase:"p1", stem:"What feels most true about the progress you've made so far?", opts:[
+      {em:"\uD83D\uDE4C", t:"I'm proud of how far I've come"},
+      {em:"\uD83D\uDE0A", t:"Things feel noticeably easier than they used to"},
+      {em:"\uD83D\uDD04", t:"I'm learning what works for me"},
+      {em:"\uD83E\uDDED", t:"I'm ready to build more around the progress I'm making"}]},
+    {id:"q3", phase:"p1", stem:"On a good week, what are you already doing that helps you feel on track?", opts:[
+      {em:"\uD83D\uDCAA", t:"Making time to move or do some strength work", strength:"muscle"},
+      {em:"\uD83D\uDDD3\uFE0F", t:"Eating in a rhythm that works for my day", strength:"structure"},
+      {em:"\uD83C\uDF73", t:"Choosing foods and meals that leave me feeling well supported", strength:"fuel"},
+      {em:"\uD83C\uDFAF", t:"Adjusting without throwing the whole week away when plans change", strength:"situations"}]},
+    {id:"q4", phase:"p2", stem:"Which skill would feel especially good to have more confidence in?", opts:[
+      {em:"\uD83C\uDFCB\uFE0F", t:"Making strength work a normal part of my week", s:{muscle:1}},
+      {em:"\u23F0", t:"Keeping a simple eating rhythm, even on quiet-appetite days", s:{structure:1}},
+      {em:"\uD83E\uDD57", t:"Making the food I eat feel more intentional", s:{fuel:1}},
+      {em:"\uD83C\uDF0D", t:"Handling travel, stress, meals out, or busy weeks with less guesswork", s:{situations:1}}]},
+    {id:"q5", phase:"p2", core:"structure", stem:"Most days, my eating pattern looks like this:", opts:[
+      {em:"\u2705", t:"I have a fairly reliable rhythm, whether I'm hungry or not", s:{structure:0}, raw:0},
+      {em:"\uD83D\uDE42", t:"I have a loose rhythm, though some days drift", s:{structure:2}, raw:1},
+      {em:"\uD83E\uDD37", t:"It changes a lot depending on the day", s:{structure:4}, raw:2, e:"Your eating pattern changes a lot depending on the day."},
+      {em:"\uD83C\uDF0A", t:"I mostly eat when hunger or the day finally prompts me", s:{structure:6}, raw:3, e:"You mostly eat when hunger or the day finally prompts you."}]},
+    {id:"q6", phase:"p2", core:"fuel", stem:"When my appetite is quieter, I usually\u2026", opts:[
+      {em:"\u2705", t:"Reach for a few meals or foods I know work well for me", s:{fuel:0}, raw:0},
+      {em:"\uD83D\uDE42", t:"Do reasonably well, though I still have some hit-or-miss days", s:{fuel:2}, raw:1},
+      {em:"\uD83E\uDD14", t:"Figure it out in the moment", s:{fuel:4}, raw:2, e:"When appetite is quieter, you figure meals out in the moment."},
+      {em:"\uD83E\uDD63", t:"Focus mainly on getting something in, without much of a plan", s:{fuel:6}, raw:3, e:"You focus mainly on getting something in, without much of a plan."}]},
+    {id:"q7", phase:"p2", core:"muscle", stem:"In a typical week, strength or resistance work is\u2026", opts:[
+      {em:"\u2705", t:"Already part of my routine", s:{muscle:0}, raw:0},
+      {em:"\uD83D\uDE42", t:"Something I fit in when I can", s:{muscle:2}, raw:1},
+      {em:"\uD83D\uDD04", t:"On my radar, but not yet consistent", s:{muscle:4}, raw:2, e:"Strength work is on your radar, but not yet consistent."},
+      {em:"\uD83C\uDF31", t:"Something I haven't really made space for yet", s:{muscle:6}, raw:3, e:"You haven't really made space for strength work yet."}]},
+    {id:"q8", phase:"p2", core:"situations", stem:"When a usual routine gets interrupted, I tend to\u2026", opts:[
+      {em:"\u2705", t:"Adjust and carry on without much drama", s:{situations:0}, raw:0},
+      {em:"\uD83D\uDE42", t:"Handle some situations well, but not all of them", s:{situations:2}, raw:1},
+      {em:"\uD83E\uDD14", t:"Wait until things settle down again", s:{situations:4}, raw:2, e:"When routine is interrupted, you wait until things settle down again."},
+      {em:"\uD83C\uDF2A\uFE0F", t:"Find it hard to know what my next best move is", s:{situations:6}, raw:3, e:"You find it hard to know your next best move when routine breaks down."}]},
+    {id:"q9", phase:"p3", stem:"Over the last couple of weeks, which moment has shown up most often?", opts:[
+      {em:"\uD83D\uDCAA", t:"I meant to make time for strength work, but it didn't quite happen", s:{muscle:4}, e:"You meant to make time for strength work, but it didn't quite happen."},
+      {em:"\u23F0", t:"The day got away from me and eating became a bit random", s:{structure:4}, e:"The day got away from you and eating became a bit random."},
+      {em:"\uD83C\uDF7D\uFE0F", t:"I needed to eat, but wasn't quite sure what would work well for me", s:{fuel:4}, e:"You needed to eat, but weren't quite sure what would work well for you."},
+      {em:"\uD83C\uDF26\uFE0F", t:"A busy, social, stressful, or off-routine moment changed my plan", s:{situations:4}, e:"A busy, social or off-routine moment changed your plan."},
+      {em:"\u2705", t:"Nothing stands out consistently \u2014 my weeks have felt fairly steady", steady:true}]},
+    {id:"q10", phase:"p3", stem:"If you had a more difficult week than usual, the area I'd feel least prepared for is\u2026", opts:[
+      {em:"\uD83D\uDCAA", t:"Keeping some kind of strength routine going", s:{muscle:2}, e:"A harder week is where keeping strength going would feel least prepared."},
+      {em:"\u23F0", t:"Keeping a workable eating rhythm", s:{structure:2}, e:"A harder week is where keeping an eating rhythm would feel least prepared."},
+      {em:"\uD83C\uDF73", t:"Knowing how to make my meals count", s:{fuel:2}, e:"A harder week is where making meals count would feel least prepared."},
+      {em:"\uD83E\uDDED", t:"Adapting when plans, emotions, or routines change", s:{situations:2}, e:"A harder week is where adapting to change would feel least prepared."},
+      {em:"\u2705", t:"I don't feel especially unprepared in one area right now", optOut:true}]},
+    {id:"q11", phase:"p3", stem:"I'd feel more at ease if I knew I could\u2026", opts:[
+      {em:"\uD83D\uDCAA", t:"Support my strength without needing a perfect workout routine", s:{muscle:2}},
+      {em:"\uD83D\uDDD3\uFE0F", t:"Feed myself with some consistency even when hunger is quiet", s:{structure:2}},
+      {em:"\uD83E\uDD57", t:"Make simple food decisions without overthinking every meal", s:{fuel:2}},
+      {em:"\uD83C\uDF26\uFE0F", t:"Get through imperfect weeks without feeling like I'm starting over", s:{situations:2}}]},
+    {id:"q12", phase:"p3", stem:"Six months from now, I'd rather not still be saying\u2026", opts:[
+      {em:"\uD83D\uDCAA", t:"I keep meaning to make strength part of my life", s:{muscle:2}},
+      {em:"\u23F0", t:"I still don't really have an eating rhythm I can rely on", s:{structure:2}},
+      {em:"\uD83C\uDF7D\uFE0F", t:"I'm still unsure how to make my smaller meals work for me", s:{fuel:2}},
+      {em:"\uD83C\uDF0D", t:"I'm still thrown off whenever real life gets in the way", s:{situations:2}},
+      {em:"\u2705", t:"None of these feels true for me right now", optOut:true}]},
+    {id:"q13", phase:"p4", stem:"What would you like instead?", opts:[
+      {em:"\uD83D\uDCAA", t:"A simple way to make strength part of my normal week", o:"muscle"},
+      {em:"\uD83D\uDDD3\uFE0F", t:"An eating rhythm I can recognize and repeat", o:"structure"},
+      {em:"\uD83C\uDF7D\uFE0F", t:"A few easy ways to make my meals feel more intentional", o:"fuel"},
+      {em:"\uD83C\uDF26\uFE0F", t:"A plan I can fall back on when life gets messy", o:"situations"}]}
+  ]; }
+
+  icon(key, size, sw){
+    const P = {
+      muscle:[["path",{d:"M6 8v8M18 8v8M6 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2M18 10h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2M6 12h12"}]],
+      structure:[["rect",{x:3.5,y:5,width:17,height:15,rx:1.5}],["path",{d:"M3.5 9.5h17M8 3v4M16 3v4"}]],
+      fuel:[["path",{d:"M8 3v6a2 2 0 0 0 4 0V3M10 9v12M16 3c-1.2 1.4-2 3-2 5a2 2 0 0 0 2 2v10"}]],
+      situations:[["circle",{cx:12,cy:8,r:3.2}],["path",{d:"M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"}]],
+      unsure:[["circle",{cx:12,cy:12,r:9}],["path",{d:"M9.5 9.2a2.5 2.5 0 0 1 4.9.6c0 1.7-2.4 2-2.4 3.6"}],["circle",{cx:12,cy:16.6,r:.6,fill:"currentColor"}]]
+    };
+    const kids = (P[key]||[]).map((n,i)=>React.createElement(n[0], Object.assign({key:i}, n[1])));
+    return React.createElement("svg",{viewBox:"0 0 24 24",width:size,height:size,fill:"none",stroke:"currentColor",strokeWidth:sw||1.6,strokeLinecap:"round",strokeLinejoin:"round"},kids);
+  }
+
+  // ---------- scoring ----------
+  // Weights are on a x2 integer scale so the brief's 0.5 signals stay exact.
+  // Behavioral core (Q5-Q8) 0-6 and observed friction (Q9) +4 dominate;
+  // corroborating reflection (Q10-Q12) +2; aspirational (Q1, Q4) +1.
+  // Q2 unscored. Q3 records an existing strength only. Q13 is preference only.
+  computeRead(override){
+    const A = this.ASSETS, ans = override || this.state.answers;
+    const totals = {muscle:0, structure:0, fuel:0, situations:0};
+    const behavioral = {muscle:0, structure:0, fuel:0, situations:0};
+    const echoPool = {behavior:[], reflection:[]};
+    let strengths = [], rawCore = 0, coreAnswered = 0, steady = false, optOuts = 0, optOutsOffered = 0;
+
+    this.QUESTIONS.forEach(q => {
+      const i = ans[q.id];
+      if(i == null) return;
+      const opt = q.opts[i];
+      if(!opt) return;
+      if(opt.strength){ strengths.push(opt.strength); return; }
+      if(q.id === "q10" || q.id === "q12"){ optOutsOffered++; if(opt.optOut) optOuts++; }
+      if(opt.steady) steady = true;
+      if(q.core != null){ rawCore += (opt.raw || 0); coreAnswered++; }
+      if(!opt.s) return;
+      Object.keys(opt.s).forEach(k => {
+        totals[k] += opt.s[k];
+        if(q.core != null || q.id === "q9") behavioral[k] += opt.s[k];
+      });
+      if(opt.e){
+        const asset = Object.keys(opt.s)[0];
+        (q.core != null || q.id === "q9" ? echoPool.behavior : echoPool.reflection).push({asset, text:opt.e});
+      }
+    });
+
+    const ranked = A.slice().sort((a,b) => {
+      if(totals[b] !== totals[a]) return totals[b] - totals[a];
+      if(behavioral[b] !== behavioral[a]) return behavioral[b] - behavioral[a];
+      return A.indexOf(a) - A.indexOf(b);
+    });
+    const primary = ranked[0], secondary = ranked[1];
+    const gap = totals[primary] - totals[secondary];
+
+    // Strong foundations: low friction across the behavioral core, a steady Q9,
+    // and the honest opt-outs taken where they were offered.
+    const strongFoundations = coreAnswered === 4 && rawCore <= 4 && steady &&
+      optOutsOffered > 0 && optOuts === optOutsOffered;
+
+    const seen = {}, echo = [];
+    echoPool.behavior.concat(echoPool.reflection)
+      .filter(c => c.asset === primary)
+      .forEach(c => { if(!seen[c.text]){ seen[c.text] = 1; echo.push(c.text); } });
+
+    const q13 = this.QUESTIONS[this.QUESTIONS.length-1];
+    return {totals, behavioral, ranked, primary, secondary,
+      close: gap > 0 && gap <= 4, tied: gap === 0, strongFoundations,
+      strengths, echo: echo.slice(0,2),
+      outcome: (q13.opts[ans.q13] || {}).o || null};
+  }
+
+  // ---------- nav ----------
+  top(){ try{ window.scrollTo({top:0, behavior:"smooth"}); }catch(e){} }
+  advance(answersOverride){
+    const qs = this.QUESTIONS, i = this.state.idx;
+    if(qs[i].id === "q9" && !this.state.interShown){ this.setState({screen:"inter"}); this.top(); return; }
+    if(i < qs.length - 1){ this.setState({idx:i+1}); this.top(); }
+    else {
+      const read = this.computeRead(answersOverride);
+      this.setState({read, screen:"analyzing", analyzeStep:0});
+      this.top();
+      this.runAnalysis();
+    }
+  }
+  runAnalysis(){
+    clearInterval(this._iv); clearTimeout(this._gate);
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduced){ this.setState({screen:"gate"}); return; }
+    const toGate = () => {
+      clearInterval(this._iv); clearTimeout(this._gate);
+      this._iv = null; this._gate = null;
+      if(this.state.screen === "analyzing") this.setState({screen:"gate"});
+    };
+    let i = 0;
+    this._iv = setInterval(() => {
+      i++;
+      if(i <= 5) this.setState({analyzeStep:i});
+      else toGate();
+    }, 600);
+    // Unconditional safety net: the gate is reached even if a tick is dropped.
+    this._gate = setTimeout(toGate, 4600);
+  }
+  componentWillUnmount(){ clearTimeout(this._adv); clearInterval(this._iv); clearTimeout(this._gate); }
+
+  submitLead(email, payload){
+    const live = this.props.leadCaptureLive === true;
+    if(!live) return Promise.resolve({demo:true});
+    return fetch("/api/lead", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email, payload})});
+  }
+
+  renderVals(){
+    const st = this.state, qs = this.QUESTIONS, q = qs[st.idx];
+    const screen = st.screen;
+    const isQuestion = screen === "quiz";
+    const sel = st.answers[q.id];
+    const GREEN = "#2F6B45", SAGE = "#DEEAE0", LINE = "#CFC29D", CARD = "#FFFDF7";
+
+    const opts = (q.opts || []).map((o, i) => {
+      const on = sel === i;
+      return {t:o.t, em:o.em || "", bg: on ? SAGE : CARD, bc: on ? GREEN : "#E3D9BE", dc: on ? GREEN : LINE, dbg: on ? GREEN : "transparent",
+        sh: on ? "inset 3px 0 0 " + GREEN : "none", dsh: on ? "inset 0 0 0 2.5px " + SAGE : "none",
+        pick: () => {
+          const answers = Object.assign({}, st.answers); answers[q.id] = i;
+          this.setState({answers});
+          clearTimeout(this._adv);
+          this._adv = setTimeout(() => this.advance(answers), 240);
+        }};
+    });
+
+    const tiles = (q.tiles || []).map(t => {
+      const on = sel === t.key;
+      return {t:t.t, d:t.d, span: t.wide ? "span 2" : "auto", icon:this.icon(t.key, 22, 1.6),
+        bg: on ? SAGE : CARD, bc: on ? GREEN : "#E3D9BE", ic: on ? GREEN : "#8B9280",
+        pick: () => { const answers = Object.assign({}, st.answers); answers[t.key ? q.id : q.id] = t.key; this.setState({answers}); }};
+    });
+
+    const read = st.read || {};
+    const mapRows = this.ASSETS.map(k => {
+      const hit = k === read.primary, second = read.close && k === read.secondary;
+      return {name:this.NAME[k], icon:this.icon(k, 20, 1.6),
+        bg: hit ? SAGE : CARD, bc: hit ? GREEN : "#E3D9BE", ic: hit ? GREEN : "#8B9280",
+        fg: hit ? "#20301F" : "#5B6353", tagfg: hit ? GREEN : "#7C3016",
+        tag: hit ? "Your quiz pointed here" : (second ? "Close behind" : "")};
+    });
+
+    const pName = this.NAME[read.primary] || "";
+    const sName = this.NAME[read.secondary] || "";
+    let splitNote = "";
+    if(read.tied) splitNote = "Worth saying plainly: your answers came out split between " + pName + " and " + sName + ". We've put " + pName + " first as a starting point, but a fuller assessment is what would actually separate them.";
+    else if(read.close) splitNote = "Your answers point most strongly toward " + pName + ", with " + sName + " close behind.";
+
+    const R = this.RESULT[read.primary] || {};
+    const mean = this.MEANING[read.primary] || {headline:"", body:"", builds:[]};
+    const base = this.props.salesPageUrl || "https://www.glp1ownership.com/";
+    const salesUrl = read.primary ? base + "?asset=" + encodeURIComponent(read.primary) + "&secondary=" + encodeURIComponent(read.secondary) + (read.outcome ? "&outcome=" + encodeURIComponent(read.outcome) : "") : base;
+
+    const lines = ["Looking at your Muscle answers…","Looking at your Structure answers…","Looking at your Fuel answers…","Looking at your Situations answers…","Finding the strongest pattern…"];
+    const analyzeLines = lines.map((text, i) => {
+      const done = st.analyzeStep > i + 1, active = st.analyzeStep === i + 1;
+      return {text, op: (done || active) ? 1 : .32, mark: done ? "✓" : "",
+        bc: done ? GREEN : (active ? GREEN : "#E3D9BE"), bg: done ? GREEN : "transparent", fg:"#FFFFFF"};
+    });
+
+    return {
+      isIntro: screen === "intro", isQuestion, isInter: screen === "inter", isAnalyzing: screen === "analyzing",
+      isGate: screen === "gate", inQuiz: isQuestion,
+      isR1: screen === "results" && st.resultIdx === 0, isR2: screen === "results" && st.resultIdx === 1,
+      isR3: screen === "results" && st.resultIdx === 2, isR4: screen === "results" && st.resultIdx === 3,
+      introMotif: this.ASSETS.map((k, i) => {
+        const skin = [{bg:"#DEEAE0", bc:"#C3D8C9", ic:"#2F6B45"},{bg:"#FFFDF7", bc:"#E3D9BE", ic:"#20301F"},{bg:"#F1DCCB", bc:"#E4C6AE", ic:"#B5502E"},{bg:"#F3EFDD", bc:"#CFC29D", ic:"#7C6B3A"}][i];
+        const blurb = {muscle:"Strength you support", structure:"Routines you can rely on", fuel:"Making your food count", situations:"Handling real life"}[k];
+        return {icon:this.icon(k, 22, 1.5), name:this.NAME[k], blurb, bg:skin.bg, bc:skin.bc, ic:skin.ic};
+      }),
+      start: () => { this.setState({screen:"quiz"}); this.top(); },
+      qNum: st.idx + 1, pct: Math.round(st.idx / qs.length * 100) + "%", qKey: q.id,
+      phase: this.PHASES[q.phase], stem: q.stem, note: q.note || "",
+      hasImage: !!this.MILESTONE[q.id],
+      isQ4: q.id === "q4", isQ7: q.id === "q7", isQ13: q.id === "q13",
+      isTiles: q.type === "tiles", isChoice: q.type !== "tiles",
+      opts, tiles, tileLocked: sel == null, tileBtnBg: sel == null ? "#B9BFAC" : GREEN,
+      next: () => this.advance(),
+      canBack: st.idx > 0,
+      back: () => { if(st.idx > 0){ this.setState({idx: st.idx - 1}); this.top(); } },
+      interNext: () => { this.setState({interShown:true, screen:"quiz", idx: st.idx + 1}); this.top(); },
+      analyzeLines,
+      email: st.email, firstName: st.firstName, emailErr: st.emailErr,
+      onName: (e) => this.setState({firstName: e.target.value, emailErr:""}),
+      gateMicro: this.props.unsubscribeLine === false ? "Free" : "Free · Unsubscribe anytime",
+      onEmail: (e) => this.setState({email: e.target.value, emailErr:""}),
+      onEmailKey: (e) => { if(e.key === "Enter") this.unlockNow(); },
+      unlock: () => this.unlockNow(),
+      primaryName: pName, secondaryName: sName,
+      primaryIcon: read.primary ? this.icon(read.primary, 24, 1.6) : null,
+      primaryImg: read.primary ? "/quiz/img/" + read.primary + ".jpg" : null,
+      primaryImgWide: read.primary ? "/quiz/img/desktop-" + read.primary + ".jpg" : null,
+      hasSecondary: !!read.close,
+      strongFoundations: !!read.strongFoundations,
+      c1Opening: read.strongFoundations
+        ? "Of the four areas, " + pName + " is the one your answers suggest may be most worth strengthening next."
+        : (R.opening || ""),
+      c1Paras: (R.paras || []).map(t => ({t})),
+      c2Headline: R.c2Headline || "",
+      c2Paras: (R.c2 || []).map(p => ({t:p.t, fg: p.em ? "#20301F" : "#3F4A3B", fw: p.em ? 600 : 400})),
+      c3Headline: R.c3Headline || "",
+      c3Paras: (R.c3 || []).map(t => ({t})),
+      c3Key: R.c3Key || "",
+      c4HeadA: R.c4HeadA || "", c4HeadB: R.c4HeadB || "",
+      c4Paras: (R.c4 || []).map(t => ({t})),
+      c4NextStep: R.nextStep || "",
+      hasEcho: (read.echo || []).length > 0, echo: (read.echo || []).slice(0,2).map(t => ({text:t})),
+      salesUrl,
+      rNext: () => { this.setState({resultIdx: Math.min(3, st.resultIdx + 1)}); this.top(); },
+      rBack: () => { this.setState({resultIdx: Math.max(0, st.resultIdx - 1)}); this.top(); }
+    };
+  }
+
+  unlockNow(){
+    const name = (this.state.firstName || "").trim();
+    const v = (this.state.email || "").trim();
+    if(!name){ this.setState({emailErr:"Mind adding your first name?"}); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ this.setState({emailErr:"That doesn't look like a full email address — mind checking it?"}); return; }
+    const r = this.state.read || {};
+    this.submitLead(v, {first_name:name, likely_asset:r.primary, secondary_asset:r.secondary, desired_outcome:r.outcome});
+    this.setState({emailErr:"", screen:"results", resultIdx:0});
+    this.top();
+  }
+}
+</script>
+</body>
+</html>

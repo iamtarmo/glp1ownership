@@ -38,7 +38,7 @@ a:hover { color: #20301F; }
 </div>
 <div style="display:flex; flex-direction:column; gap:10px; margin-top:6px">
 <sc-if value="{{ protocolReady }}" hint-placeholder-val="{{ true }}">
-<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#2F6B45; color:#F7F2E4; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em" style-hover="background:#20301F">OPEN THE OWNERSHIP PROTOCOL →</a>
+<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#2F6B45; color:#F7F2E4; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; letter-spacing:0.12em; box-shadow:0 6px 18px rgba(47,107,69,0.34)" style-hover="background:#20301F">OPEN THE OWNERSHIP PROTOCOL →</a>
 </sc-if>
 <sc-if value="{{ protocolPending }}" hint-placeholder-val="{{ false }}">
 <div style="display:inline-flex; flex-direction:column; gap:8px">
@@ -107,7 +107,7 @@ a:hover { color: #20301F; }
 </div>
 <div style="display:flex; flex-direction:column; gap:10px; margin-top:6px">
 <sc-if value="{{ protocolReady }}" hint-placeholder-val="{{ true }}">
-<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#F7F2E4; color:#20301F; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.12em" style-hover="background:#CFC29D">OPEN THE PROTOCOL →</a>
+<a href="{{ links.protocolUrl }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:56px; padding:0 30px; border-radius:14px; background:#2F6B45; color:#F7F2E4; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; letter-spacing:0.12em; box-shadow:0 4px 14px rgba(47,107,69,0.30)" style-hover="background:#20301F">OPEN THE PROTOCOL →</a>
 </sc-if>
 <sc-if value="{{ protocolPending }}" hint-placeholder-val="{{ false }}">
 <div style="display:flex; flex-direction:column; gap:8px">
@@ -140,7 +140,7 @@ a:hover { color: #20301F; }
 <h3 style="font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:21px; line-height:1.2; margin:0">{{ tool.name }}</h3>
 <p style="margin:0; font-size:15px; line-height:1.6; color:rgba(32,48,31,0.75); flex:1">{{ tool.description }}</p>
 <sc-if value="{{ tool.ready }}" hint-placeholder-val="{{ true }}">
-<a href="{{ tool.href }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:50px; padding:0 20px; border-radius:12px; background:#DEEAE0; color:#20301F; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-align:center" style-hover="background:#2F6B45; color:#F7F2E4">{{ tool.cta }}</a>
+<a href="{{ tool.href }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:50px; padding:0 20px; border-radius:12px; background:#2F6B45; color:#F7F2E4; text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:500; letter-spacing:0.1em; text-align:center; box-shadow:0 4px 14px rgba(47,107,69,0.30)" style-hover="background:#20301F">{{ tool.cta }}</a>
 </sc-if>
 <sc-if value="{{ tool.pending }}" hint-placeholder-val="{{ false }}">
 <div style="display:flex; flex-direction:column; gap:8px">
