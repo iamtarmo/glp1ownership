@@ -94,6 +94,17 @@ function json(body, status = 200) {
   });
 }
 
+// Temporary pre-launch check: reports only whether config is present, never any value.
+// Remove once the first real purchase has been verified end to end.
+export async function GET() {
+  return json({
+    stripeWebhookSecretConfigured: Boolean(process.env.STRIPE_WEBHOOK_SECRET),
+    brevoApiKeyConfigured: Boolean(process.env.BREVO_API_KEY),
+    accessUrl: ACCESS_URL,
+    watchingPaymentLink: GLP1_PAYMENT_LINK,
+  });
+}
+
 export async function POST(request) {
   // Stripe signs the exact bytes it sent, so read the body as raw text.
   const rawBody = await request.text();
