@@ -41,29 +41,21 @@ function confirmationHtml(firstName) {
 <div style="background:#F7F2E4;padding:32px 16px;font-family:Helvetica,Arial,sans-serif;color:#20301F;">
   <div style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid rgba(32,48,31,0.14);border-radius:14px;padding:32px;">
     <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.14em;color:#B5502E;font-weight:700;">ORDER CONFIRMED</p>
-    <h1 style="margin:0 0 18px;font-family:Georgia,serif;font-size:26px;line-height:1.2;color:#20301F;">Welcome to the GLP-1 Ownership Protocol</h1>
+    <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:26px;line-height:1.25;color:#20301F;">Your GLP-1 Ownership Protocol is ready</h1>
 
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">${greeting}</p>
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">Your payment went through and your order is confirmed. Here's everything included:</p>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">${greeting}</p>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">Congratulations &mdash; you now have access to the GLP-1 Ownership Protocol.</p>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">This is your space to turn what you&rsquo;re learning into a simple system that supports your progress in real life.</p>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.65;">You can access your materials here:</p>
 
-    <ul style="margin:0 0 20px;padding-left:20px;font-size:15px;line-height:1.9;">
-      <li>The GLP-1 Ownership Protocol</li>
-      <li>4-Week Ownership Tracker</li>
-      <li>Emergency Action Finder</li>
-      <li>Easy Meals Generator</li>
-      <li>Craving Response Card</li>
-      <li>GLP-1 Myths, Debunked</li>
-    </ul>
+    <p style="margin:0 0 22px;text-align:center;">
+      <a href="${ACCESS_URL}" style="display:inline-block;background:#2F6B45;color:#F7F2E4;text-decoration:none;font-weight:700;font-size:15px;padding:15px 28px;border-radius:9px;">Access the GLP-1 Ownership Protocol</a>
+    </p>
 
-    <div style="background:#DEEAE0;border-radius:11px;padding:18px 20px;margin:0 0 20px;text-align:center;">
-      <p style="margin:0 0 12px;font-size:11px;letter-spacing:0.12em;color:#2F6B45;font-weight:700;">YOUR ACCESS</p>
-      <a href="${ACCESS_URL}" style="display:inline-block;background:#2F6B45;color:#F7F2E4;text-decoration:none;font-weight:700;font-size:15px;padding:14px 26px;border-radius:9px;">Open your protocol and tools &rarr;</a>
-      <p style="margin:12px 0 0;font-size:13px;line-height:1.6;color:rgba(32,48,31,0.75);">Bookmark this page &mdash; it's where your guide and all five tools live.</p>
-    </div>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">Take it one step at a time. You don&rsquo;t need to change everything at once.</p>
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.65;">If you have any questions or need help accessing your materials, reply to this email or contact us at <a href="mailto:support@glp1ownership.com" style="color:#2F6B45;">support@glp1ownership.com</a>.</p>
 
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">Your purchase is covered by a 30-day money-back guarantee. If it isn't right for you, just reply to this email within 30 days and we'll refund you in full.</p>
-
-    <p style="margin:0;font-size:15px;line-height:1.6;">&mdash; The GLP-1 Ownership team</p>
+    <p style="margin:0;font-size:15px;line-height:1.65;">&mdash; The GLP-1 Ownership Team</p>
   </div>
 
   <p style="max-width:560px;margin:18px auto 0;font-size:11px;line-height:1.6;color:rgba(32,48,31,0.55);">
@@ -85,7 +77,7 @@ async function sendConfirmation(toEmail, toName) {
       sender: SENDER,
       replyTo: SENDER,
       to: [toName ? { email: toEmail, name: toName } : { email: toEmail }],
-      subject: 'Your GLP-1 Ownership Protocol order is confirmed',
+      subject: 'Your GLP-1 Ownership Protocol is ready',
       htmlContent: confirmationHtml(firstName),
     }),
   });
