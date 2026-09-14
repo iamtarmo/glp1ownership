@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: /access
 Disallow: /checkout

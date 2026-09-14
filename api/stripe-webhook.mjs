@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 const SENDER = { name: 'GLP-1 Ownership', email: 'support@glp1ownership.com' };
-const ACCESS_URL = 'https://www.glp1ownership.com/access';
+const ACCESS_URL = 'https://www.glp1ownership.com/access-mgidv7j5xpe';
 const SIGNATURE_TOLERANCE_SECONDS = 300;
 
 // This Stripe account also sells Metabolic Energy Switch at the same $17, and
