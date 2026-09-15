@@ -555,9 +555,8 @@ class Component extends DCLogic {
   componentWillUnmount(){ clearTimeout(this._adv); clearInterval(this._iv); clearTimeout(this._gate); }
 
   submitLead(email, payload){
-    const live = this.props.leadCaptureLive === true;
-    if(!live) return Promise.resolve({demo:true});
-    return fetch("/api/lead", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email, payload})});
+    // Fire and forget: a hiccup here must never stop someone seeing their result.
+    return fetch("/api/lead", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email, payload})}).catch(function(){});
   }
 
   renderVals(){
