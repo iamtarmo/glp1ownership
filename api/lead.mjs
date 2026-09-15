@@ -90,44 +90,59 @@ async function upsertContact(email, firstName, read) {
   }
 }
 
-function resultHtml(firstName, assetKey, secondaryKey) {
+function resultText(firstName, assetKey, secondaryKey) {
   const a = ASSET[assetKey];
-  const greeting = firstName ? `Hi ${firstName},` : 'Hi,';
   const secondary = ASSET[secondaryKey];
   const link = SQUEEZE_URL + '?asset=' + encodeURIComponent(assetKey);
 
-  return `
-<div style="background:#F7F2E4;padding:32px 16px;font-family:Helvetica,Arial,sans-serif;color:#20301F;">
-  <div style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid rgba(32,48,31,0.14);border-radius:14px;padding:32px;">
-    <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.14em;color:#B5502E;font-weight:700;">YOUR QUIZ RESULT</p>
-    <h1 style="margin:0 0 20px;font-family:Georgia,serif;font-size:26px;line-height:1.25;color:#20301F;">Your answers point to ${a.label}</h1>
+  const lines = [
+    firstName ? `Hi ${firstName},` : 'Hi,',
+    '',
+    "Here's the copy of your Ownership profile, as promised.",
+    '',
+    `Your answers point to ${a.label}.`,
+    '',
+    a.line,
+    '',
+    'What building it looks like:',
+    ...a.builds.map((b) => `- ${b}`),
+  ];
 
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">${greeting}</p>
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">Here's the copy of your Ownership profile, as promised.</p>
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">Of the four assets, <strong>${a.label}</strong> looks like the one with the most to build right now. ${a.line}</p>
+  if (secondary) {
+    lines.push(
+      '',
+      `${secondary.label} came in close behind, so keep it in view. Starting in one place beats spreading yourself across four.`
+    );
+  }
 
-    <div style="background:#DEEAE0;border-radius:11px;padding:18px 20px;margin:0 0 20px;">
-      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.12em;color:#2F6B45;font-weight:700;">WHAT BUILDING IT LOOKS LIKE</p>
-      <ul style="margin:0;padding-left:18px;font-size:14.5px;line-height:1.8;">
-        ${a.builds.map((b) => `<li>${b}</li>`).join('')}
-      </ul>
-    </div>
+  lines.push(
+    '',
+    'One thing worth saying: this quiz is a directional read, not a full assessment. The Ownership Protocol scores all four assets properly and turns the weakest one into a focused 4-week plan, if you want to go further:',
+    link,
+    '',
+    '- The GLP-1 Ownership Team',
+    '',
+    '---',
+    'Educational and informational purposes only. Not medical advice, and not intended to diagnose, treat, cure, or prevent any disease or medical condition, or to replace individualized advice from a qualified healthcare professional. Do not start, stop, or change a medication, dose, treatment plan, diet, or exercise program based on this without consulting an appropriate healthcare professional.'
+  );
 
-    ${secondary ? `<p style="margin:0 0 16px;font-size:15px;line-height:1.65;">${secondary.label} came in close behind, so keep it in view — but starting in one place beats spreading yourself across four.</p>` : ''}
+  return lines.join('\n');
+}
 
-    <p style="margin:0 0 20px;font-size:15px;line-height:1.65;">This quiz is a directional read, not a full assessment. The Ownership Protocol scores all four assets properly and turns the weakest into a focused 4-week plan.</p>
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
-    <p style="margin:0 0 22px;text-align:center;">
-      <a href="${link}" style="display:inline-block;background:#2F6B45;color:#F7F2E4;text-decoration:none;font-weight:700;font-size:15px;padding:15px 28px;border-radius:9px;">See my 4-week Ownership plan</a>
-    </p>
-
-    <p style="margin:0;font-size:15px;line-height:1.65;">&mdash; The GLP-1 Ownership Team</p>
-  </div>
-
-  <p style="max-width:560px;margin:18px auto 0;font-size:11px;line-height:1.6;color:rgba(32,48,31,0.55);">
-    The GLP-1 Ownership Protocol is provided for educational and informational purposes only. It is not medical advice and is not intended to diagnose, treat, cure, or prevent any disease or medical condition, or to replace individualized advice from a qualified healthcare professional. Do not start, stop, or change a medication, dose, treatment plan, diet, or exercise program based on this material without consulting an appropriate healthcare professional.
-  </p>
-</div>`.trim();
+// Plain-text shaped so Gmail reads this as the requested delivery it is,
+// rather than a promotion. The HTML part mirrors the text exactly: no
+// buttons, no colour blocks, just a bare link.
+function resultHtml(firstName, assetKey, secondaryKey) {
+  const text = resultText(firstName, assetKey, secondaryKey);
+  const link = SQUEEZE_URL + '?asset=' + encodeURIComponent(assetKey);
+  const body = escapeHtml(text)
+    .replace(escapeHtml(link), `<a href="${link}">${link}</a>`)
+    .replace(/\n/g, '<br>');
+  return `<div style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#222;">${body}</div>`;
 }
 
 async function sendResult(email, firstName, assetKey, secondaryKey) {
@@ -139,6 +154,7 @@ async function sendResult(email, firstName, assetKey, secondaryKey) {
       replyTo: SENDER,
       to: [firstName ? { email, name: firstName } : { email }],
       subject: `Your Ownership profile: ${a.label}`,
+      textContent: resultText(firstName, assetKey, secondaryKey),
       htmlContent: resultHtml(firstName, assetKey, secondaryKey),
     }),
   });
